@@ -1,0 +1,63 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-bg;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+
+  @include sm-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include md-up {
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-5;
+  }
+}
+
+.card {
+  @include card;
+  padding: $space-8 $space-6;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+.iconWrap {
+  width: 56px;
+  height: 56px;
+  border-radius: $radius-lg;
+  background: linear-gradient(
+    135deg,
+    rgba(168, 213, 186, 0.4) 0%,
+    rgba(245, 230, 200, 0.4) 100%
+  );
+  color: $color-primary-dark;
+  display: grid;
+  place-items: center;
+}
+
+.title {
+  font-size: 1.15rem;
+  font-weight: $fw-semibold;
+  color: $color-text-primary;
+  margin: 0;
+  line-height: $lh-snug;
+}
+
+.desc {
+  font-size: 0.95rem;
+  color: $color-text-secondary;
+  line-height: $lh-normal;
+  margin: 0;
+}

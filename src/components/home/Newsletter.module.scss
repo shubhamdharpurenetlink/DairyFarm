@@ -1,0 +1,83 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-bg;
+}
+
+.card {
+  background: linear-gradient(
+    135deg,
+    $color-primary 0%,
+    $color-primary-dark 100%
+  );
+  border-radius: $radius-2xl;
+  padding: $space-10 $space-6;
+  display: grid;
+  gap: $space-6;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: $shadow-xl;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(
+      circle,
+      rgba(245, 230, 200, 0.18) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  @include md-up {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: $space-10 $space-12;
+    gap: $space-8;
+  }
+}
+
+.iconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: $radius-xl;
+  background: rgba(255, 255, 255, 0.15);
+  display: grid;
+  place-items: center;
+  color: $color-accent-gold;
+  backdrop-filter: blur(12px);
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: $fw-bold;
+  margin: 0 0 $space-1;
+  color: white;
+}
+
+.sub {
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.form {
+  display: flex;
+  gap: $space-3;
+  flex-direction: column;
+
+  @include xs-up {
+    flex-direction: row;
+  }
+}
+
+.input {
+  min-width: 240px;
+  background: rgba(255, 255, 255, 0.95) !important;
+}

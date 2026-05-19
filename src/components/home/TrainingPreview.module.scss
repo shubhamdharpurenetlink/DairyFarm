@@ -1,0 +1,133 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: linear-gradient(180deg, $color-surface 0%, $color-bg 100%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+
+  @include md-up {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-8;
+  }
+}
+
+.card {
+  border-radius: $radius-xl;
+  overflow: hidden;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-sm;
+  transition: box-shadow $duration-normal $ease-out;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+.cardLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.imgWrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.img {
+  object-fit: cover;
+  transition: transform $duration-slow $ease-out;
+
+  .card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.priceTag {
+  position: absolute;
+  top: $space-3;
+  right: $space-3;
+  background: $color-accent-gold;
+  color: $color-primary-dark;
+  font-weight: $fw-bold;
+  padding: $space-2 $space-3;
+  border-radius: $radius-md;
+  font-size: 0.95rem;
+  box-shadow: $shadow-sm;
+}
+
+.cardBody {
+  padding: $space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.duration {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-size: $fs-small;
+  color: $color-text-secondary;
+}
+
+.cardTitle {
+  font-size: 1.35rem;
+  font-weight: $fw-bold;
+  margin: 0;
+  line-height: $lh-snug;
+  color: $color-text-primary;
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  color: $color-text-secondary;
+  line-height: $lh-normal;
+  margin: 0;
+}
+
+.cardFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: $space-3;
+  margin-top: $space-2;
+  border-top: 1px solid $color-border;
+}
+
+.seats {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-size: $fs-small;
+  color: $color-text-secondary;
+  font-weight: $fw-medium;
+}
+
+.enroll {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-size: $fs-small;
+  color: $color-primary;
+  font-weight: $fw-semibold;
+}
+
+.viewAll {
+  display: flex;
+  justify-content: center;
+  margin-top: $space-10;
+}

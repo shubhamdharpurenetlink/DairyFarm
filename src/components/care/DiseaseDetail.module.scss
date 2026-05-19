@@ -1,0 +1,166 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.page {
+  background: $color-bg;
+  padding-bottom: $space-16;
+}
+
+.heroWrap {
+  position: relative;
+  min-height: 380px;
+  margin-top: calc($header-height-mobile * -1);
+  padding-top: $header-height-mobile;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+
+  @include md-up {
+    margin-top: calc($header-height * -1);
+    padding-top: $header-height;
+    min-height: 440px;
+  }
+}
+
+.heroImg {
+  object-fit: cover;
+  z-index: 0;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 58, 42, 0.4) 0%,
+    rgba(20, 58, 42, 0.92) 100%
+  );
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  padding-bottom: $space-10;
+  padding-top: $space-10;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: $fs-small;
+  width: fit-content;
+
+  &:hover {
+    color: $color-accent-gold;
+  }
+}
+
+.cat {
+  align-self: flex-start;
+  margin: 0 !important;
+}
+
+.title {
+  font-family: $font-heading;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: $fw-extrabold;
+  margin: 0;
+  color: white;
+  line-height: 1.1;
+}
+
+.meta {
+  display: flex;
+  gap: $space-4;
+  font-size: $fs-small;
+  color: rgba(255, 255, 255, 0.8);
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+  }
+}
+
+.content {
+  padding-top: $space-10;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-8;
+}
+
+.disclaimer {
+  margin-bottom: 0;
+}
+
+.summary {
+  font-size: 1.2rem;
+  font-weight: $fw-medium;
+  line-height: $lh-relaxed;
+  color: $color-text-primary;
+  padding: $space-5;
+  background: $color-accent;
+  border-radius: $radius-lg;
+  border-left: 4px solid $color-accent-gold;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-6;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+}
+
+.blockTitle {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: $fw-bold;
+    color: $color-text-primary;
+  }
+}
+
+.blockIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-md;
+  background: $color-primary-light;
+  color: $color-primary-dark;
+  display: grid;
+  place-items: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding-left: $space-6;
+  font-size: 1rem;
+  line-height: $lh-relaxed;
+  color: $color-text-secondary;
+
+  li {
+    list-style: disc;
+    padding-left: $space-2;
+  }
+}
+
+.treatmentBlock {
+  background: linear-gradient(135deg, #fff7e6 0%, #fff 100%);
+  border-color: $color-accent-gold;
+}

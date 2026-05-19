@@ -1,0 +1,176 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.footer {
+  margin-top: $space-24;
+  background: linear-gradient(180deg, $color-primary-dark 0%, #143a2a 100%);
+  color: rgba(255, 255, 255, 0.85);
+  padding-bottom: calc($bottom-nav-height + $space-4);
+
+  @include md-up {
+    padding-bottom: 0;
+  }
+}
+
+.inner {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-10;
+  padding-top: $space-16;
+  padding-bottom: $space-12;
+
+  @include sm-up {
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: $space-8;
+  }
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  max-width: 320px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  font-size: 1.25rem;
+  font-weight: $fw-bold;
+  color: white;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  background: rgba(255, 255, 255, 0.15);
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(8px);
+}
+
+.tagline {
+  font-size: $fs-small;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: $lh-relaxed;
+}
+
+.socials {
+  display: flex;
+  gap: $space-3;
+  margin-top: $space-2;
+}
+
+.socialBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-full;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  display: grid;
+  place-items: center;
+  transition: all $duration-fast $ease-out;
+
+  &:hover {
+    background: $color-accent-gold;
+    color: $color-primary-dark;
+    transform: translateY(-2px);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.colTitle {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: $fw-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: $space-2;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  font-size: $fs-small;
+
+  li a {
+    color: rgba(255, 255, 255, 0.75);
+    transition: color $duration-fast $ease-out;
+
+    &:hover {
+      color: $color-accent-gold;
+    }
+  }
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-2;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: $lh-snug;
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: $color-accent-gold;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+.installBtn {
+  margin-top: $space-4;
+  background: $color-accent-gold !important;
+  border-color: $color-accent-gold !important;
+  color: $color-primary-dark !important;
+  font-weight: $fw-semibold !important;
+
+  &:hover {
+    background: $color-accent-gold-dark !important;
+    border-color: $color-accent-gold-dark !important;
+  }
+}
+
+.bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bottomInner {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding-top: $space-6;
+  padding-bottom: $space-6;
+  font-size: $fs-small;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+
+  @include sm-up {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.legal {
+  display: flex;
+  gap: $space-2;
+  justify-content: center;
+
+  a:hover {
+    color: $color-accent-gold;
+  }
+}

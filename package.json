@@ -1,0 +1,37 @@
+{
+  "name": "laxmi-dairy-farm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modern bilingual PWA website for Laxmi Dairy Farm - Phase 1 (UI only with dummy data)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^15.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "antd": "^5.22.0",
+    "@ant-design/icons": "^5.5.1",
+    "@ant-design/nextjs-registry": "^1.0.2",
+    "@ant-design/cssinjs": "^1.21.1",
+    "framer-motion": "^11.11.0",
+    "next-intl": "^3.26.0",
+    "zustand": "^5.0.0",
+    "react-hook-form": "^7.53.0",
+    "zod": "^3.23.8",
+    "@hookform/resolvers": "^3.9.0",
+    "@ducanh2912/next-pwa": "^10.2.9",
+    "lucide-react": "^0.451.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5",
+    "sass": "^1.79.0"
+  }
+}

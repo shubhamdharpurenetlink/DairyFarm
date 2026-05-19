@@ -1,0 +1,39 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-bg;
+  padding-top: $space-10 !important;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-bottom: $space-8;
+
+  @include sm-up {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-5;
+
+  @include sm-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include md-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include lg-up {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

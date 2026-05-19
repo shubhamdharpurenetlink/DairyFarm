@@ -1,0 +1,183 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.page {
+  background: $color-bg;
+  padding-bottom: $space-16;
+}
+
+.top {
+  padding-top: $space-6;
+  padding-bottom: $space-4;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $fs-small;
+  color: $color-text-secondary;
+  font-weight: $fw-medium;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-8;
+  padding-top: $space-4;
+  padding-bottom: $space-8;
+
+  @include md-up {
+    grid-template-columns: 1fr 1fr;
+    gap: $space-12;
+  }
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.mainImg {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  box-shadow: $shadow-lg;
+}
+
+.img {
+  object-fit: cover;
+}
+
+.thumbs {
+  display: flex;
+  gap: $space-3;
+}
+
+.thumb {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: $radius-md;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color $duration-fast $ease-out;
+
+  &.active,
+  &:hover {
+    border-color: $color-primary;
+  }
+}
+
+.thumbImg {
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.cat {
+  align-self: flex-start;
+  font-size: 0.85rem !important;
+  padding: 4px $space-3 !important;
+}
+
+.title {
+  @include h1;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+.origin {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  color: $color-text-tertiary;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.desc {
+  font-size: 1.05rem;
+  color: $color-text-secondary;
+  line-height: $lh-relaxed;
+}
+
+.statsCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+}
+
+.statCard {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  background: $color-primary-light;
+  color: $color-primary-dark;
+  display: grid;
+  place-items: center;
+}
+
+.statLbl {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $color-text-tertiary;
+}
+
+.statVal {
+  font-family: $font-heading;
+  font-size: 1.3rem;
+  font-weight: $fw-bold;
+  color: $color-primary;
+}
+
+.cta {
+  margin-top: $space-2;
+}
+
+.details {
+  padding-top: $space-8;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding-left: $space-4;
+  font-size: 1rem;
+  line-height: $lh-relaxed;
+  color: $color-text-secondary;
+
+  li {
+    list-style: disc;
+  }
+}
+
+.para {
+  font-size: 1.05rem;
+  line-height: $lh-relaxed;
+  color: $color-text-secondary;
+  max-width: 720px;
+}

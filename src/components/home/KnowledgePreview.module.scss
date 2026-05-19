@@ -1,0 +1,100 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-bg;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+
+  @include sm-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include md-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  border-radius: $radius-xl;
+  overflow: hidden;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-sm;
+  transition: box-shadow $duration-normal $ease-out;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+.cardLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.imgWrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: $color-surface-alt;
+}
+
+.img {
+  object-fit: cover;
+  transition: transform $duration-slow $ease-out;
+
+  .card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.cardBody {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.cat {
+  align-self: flex-start;
+  margin: 0;
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: $fw-semibold;
+  margin: 0;
+  line-height: $lh-snug;
+  color: $color-text-primary;
+  @include text-clamp(2);
+}
+
+.cardSummary {
+  font-size: 0.95rem;
+  color: $color-text-secondary;
+  line-height: $lh-normal;
+  margin: 0;
+  @include text-clamp(3);
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $fs-small;
+  color: $color-text-tertiary;
+  padding-top: $space-3;
+  border-top: 1px solid $color-border;
+}
+
+.viewAll {
+  display: flex;
+  justify-content: center;
+  margin-top: $space-10;
+}

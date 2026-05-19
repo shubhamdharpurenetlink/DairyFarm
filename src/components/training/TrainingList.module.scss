@@ -1,0 +1,174 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-bg;
+  padding-top: $space-10 !important;
+}
+
+.statsBar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-3;
+  padding: $space-6;
+  background: linear-gradient(
+    135deg,
+    $color-primary 0%,
+    $color-primary-dark 100%
+  );
+  border-radius: $radius-xl;
+  margin-bottom: $space-8;
+  color: white;
+  box-shadow: $shadow-lg;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $space-1;
+}
+
+.statValue {
+  font-family: $font-heading;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: $fw-extrabold;
+  color: $color-accent-gold;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: $fs-small;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+}
+
+.filterRow {
+  margin-bottom: $space-6;
+  overflow-x: auto;
+  @include scrollbar-hide;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-5;
+
+  @include sm-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include lg-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  transition: box-shadow $duration-normal $ease-out;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+.link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.imgWrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.img {
+  object-fit: cover;
+  transition: transform $duration-slow $ease-out;
+
+  .card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.price {
+  position: absolute;
+  top: $space-3;
+  right: $space-3;
+  background: $color-accent-gold;
+  color: $color-primary-dark;
+  font-weight: $fw-bold;
+  padding: $space-2 $space-3;
+  border-radius: $radius-md;
+  font-size: 0.95rem;
+}
+
+.body {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.tags {
+  display: flex;
+  gap: $space-3;
+  align-items: center;
+}
+
+.dur {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-size: $fs-small;
+  color: $color-text-secondary;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: $fw-bold;
+  margin: 0;
+  line-height: $lh-snug;
+  color: $color-text-primary;
+}
+
+.shortDesc {
+  font-size: 0.95rem;
+  color: $color-text-secondary;
+  margin: 0;
+  line-height: $lh-normal;
+  @include text-clamp(2);
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: $space-3;
+  border-top: 1px solid $color-border;
+}
+
+.seats {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-size: $fs-small;
+  color: $color-text-secondary;
+  font-weight: $fw-medium;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  color: $color-primary;
+  font-weight: $fw-semibold;
+  font-size: $fs-small;
+}

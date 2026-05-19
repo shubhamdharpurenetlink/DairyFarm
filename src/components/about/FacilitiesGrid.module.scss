@@ -1,0 +1,83 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-surface;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+
+  @include sm-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include md-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  border-radius: $radius-xl;
+  overflow: hidden;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-sm;
+  transition: box-shadow $duration-normal $ease-out;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+.imgWrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.img {
+  object-fit: cover;
+  transition: transform $duration-slow $ease-out;
+
+  .card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.iconBadge {
+  position: absolute;
+  top: $space-3;
+  right: $space-3;
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-md;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  color: $color-primary;
+  display: grid;
+  place-items: center;
+}
+
+.cardBody {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: $fw-semibold;
+  margin: 0;
+  color: $color-text-primary;
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  color: $color-text-secondary;
+  line-height: $lh-normal;
+  margin: 0;
+}

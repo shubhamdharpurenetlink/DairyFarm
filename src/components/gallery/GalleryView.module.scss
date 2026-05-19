@@ -1,0 +1,167 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-bg;
+  padding-top: $space-10 !important;
+}
+
+.masonry {
+  columns: 1;
+  column-gap: $space-4;
+  margin-top: $space-6;
+
+  @include xs-up {
+    columns: 2;
+  }
+
+  @include sm-up {
+    columns: 3;
+  }
+
+  @include md-up {
+    columns: 3;
+    column-gap: $space-5;
+  }
+
+  @include lg-up {
+    columns: 4;
+  }
+}
+
+.photo {
+  width: 100%;
+  break-inside: avoid;
+  display: block;
+  margin-bottom: $space-4;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  position: relative;
+  cursor: zoom-in;
+  border: none;
+  padding: 0;
+  background: $color-surface-alt;
+  box-shadow: $shadow-sm;
+
+  @include md-up {
+    margin-bottom: $space-5;
+  }
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+.photoImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform $duration-slow $ease-out;
+
+  .photo:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.7) 100%);
+  opacity: 0;
+  transition: opacity $duration-fast $ease-out;
+  padding: $space-3;
+
+  .photo:hover & {
+    opacity: 1;
+  }
+}
+
+.photoTitle {
+  color: white;
+  font-size: $fs-small;
+  font-weight: $fw-semibold;
+  text-align: left;
+}
+
+.videoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-5;
+  margin-top: $space-6;
+
+  @include sm-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include md-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.videoCard {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-sm;
+  transition: box-shadow $duration-normal $ease-out;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+    color: inherit;
+  }
+}
+
+.videoThumbWrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.videoThumb {
+  object-fit: cover;
+}
+
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  transition: background $duration-fast $ease-out;
+
+  .videoCard:hover & {
+    background: rgba(0, 0, 0, 0.55);
+  }
+}
+
+.playBtn {
+  width: 64px;
+  height: 64px;
+  border-radius: $radius-full;
+  background: rgba(255, 0, 0, 0.85);
+  display: grid;
+  place-items: center;
+  transition: transform $duration-fast $ease-out;
+
+  .videoCard:hover & {
+    transform: scale(1.15);
+  }
+}
+
+.videoTitle {
+  padding: $space-4;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: $fw-semibold;
+  color: $color-text-primary;
+}
+
+.empty {
+  padding: $space-16 0;
+}

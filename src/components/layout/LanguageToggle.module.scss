@@ -1,0 +1,10 @@
+@use "@/styles/variables" as *;
+
+.toggle {
+  font-weight: $fw-semibold;
+
+  :global(.ant-segmented-item-selected) {
+    background: $color-primary !important;
+    color: $color-text-inverse !important;
+  }
+}

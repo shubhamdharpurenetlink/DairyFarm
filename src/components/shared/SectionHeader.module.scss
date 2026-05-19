@@ -1,0 +1,41 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  margin-bottom: $space-12;
+  max-width: 720px;
+
+  &.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &.left {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.eyebrow {
+  font-size: $fs-small;
+  font-weight: $fw-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: $color-primary;
+}
+
+.title {
+  @include h2;
+  color: $color-text-primary;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: $color-text-secondary;
+  line-height: $lh-relaxed;
+}

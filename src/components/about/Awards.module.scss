@@ -1,0 +1,75 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: linear-gradient(180deg, $color-bg 0%, $color-accent 100%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-5;
+
+  @include sm-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include md-up {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  background: $color-surface;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border;
+  padding: $space-6;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  box-shadow: $shadow-sm;
+  transition: box-shadow $duration-normal $ease-out;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+.iconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: $radius-full;
+  background: linear-gradient(
+    135deg,
+    $color-accent-gold 0%,
+    $color-accent-gold-dark 100%
+  );
+  color: white;
+  display: grid;
+  place-items: center;
+  margin-bottom: $space-2;
+  box-shadow: 0 4px 12px rgba(201, 165, 106, 0.4);
+}
+
+.year {
+  font-family: $font-heading;
+  font-size: 1.3rem;
+  font-weight: $fw-extrabold;
+  color: $color-primary;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: $fw-semibold;
+  color: $color-text-primary;
+  margin: 0;
+  line-height: $lh-snug;
+}
+
+.issuer {
+  font-size: $fs-small;
+  color: $color-text-secondary;
+  margin: 0;
+}

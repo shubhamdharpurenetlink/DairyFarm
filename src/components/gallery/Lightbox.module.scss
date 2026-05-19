@@ -1,0 +1,80 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  padding: $space-4;
+}
+
+.btn {
+  position: absolute;
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-full;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background $duration-fast $ease-out;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+
+.close {
+  top: $space-5;
+  right: $space-5;
+}
+
+.prev {
+  top: 50%;
+  left: $space-4;
+  transform: translateY(-50%);
+}
+
+.next {
+  top: 50%;
+  right: $space-4;
+  transform: translateY(-50%);
+}
+
+.frame {
+  width: min(90vw, 1100px);
+  height: min(85vh, 800px);
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.imgWrap {
+  position: relative;
+  flex: 1;
+}
+
+.img {
+  object-fit: contain;
+}
+
+.caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: $fs-small;
+  font-weight: $fw-medium;
+}
+
+.counter {
+  color: rgba(255, 255, 255, 0.6);
+  font-variant-numeric: tabular-nums;
+}

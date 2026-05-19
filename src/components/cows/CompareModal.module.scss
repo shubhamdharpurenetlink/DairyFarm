@@ -1,0 +1,71 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: $space-3 $space-4;
+    text-align: left;
+    border-bottom: 1px solid $color-border;
+    font-size: 0.95rem;
+    color: $color-text-primary;
+    vertical-align: top;
+  }
+
+  thead th {
+    border-bottom: 2px solid $color-primary-light;
+    vertical-align: bottom;
+  }
+
+  tbody th {
+    font-weight: $fw-semibold;
+    color: $color-text-tertiary;
+    width: 140px;
+    background: $color-surface-alt;
+  }
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+}
+
+.imgWrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: $radius-full;
+  overflow: hidden;
+  border: 3px solid $color-primary-light;
+}
+
+.img {
+  object-fit: cover;
+}
+
+.name {
+  font-weight: $fw-bold;
+  font-size: 1rem;
+  color: $color-text-primary;
+}
+
+.smallText {
+  font-size: 0.875rem;
+  line-height: $lh-snug;
+  color: $color-text-secondary;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $space-3;
+  margin-top: $space-6;
+}

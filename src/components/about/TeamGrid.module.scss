@@ -1,0 +1,61 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-bg;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-6;
+
+  @include sm-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include md-up {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $space-3;
+}
+
+.avatarWrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: $radius-full;
+  overflow: hidden;
+  border: 4px solid $color-surface;
+  box-shadow: $shadow-md;
+  transition: box-shadow $duration-normal $ease-out;
+
+  .card:hover & {
+    box-shadow: $shadow-lg;
+  }
+}
+
+.avatar {
+  object-fit: cover;
+}
+
+.name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: $fw-semibold;
+  color: $color-text-primary;
+}
+
+.role {
+  font-size: $fs-small;
+  color: $color-text-secondary;
+  margin: 0;
+  line-height: $lh-snug;
+}

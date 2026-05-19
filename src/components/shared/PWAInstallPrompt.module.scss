@@ -1,0 +1,80 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.prompt {
+  position: fixed;
+  z-index: $z-toast;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-xl;
+  padding: $space-4;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: $space-3;
+  width: calc(100% - $space-8);
+  max-width: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc($bottom-nav-height + $space-3 + env(safe-area-inset-bottom));
+
+  @include md-up {
+    left: $space-6;
+    right: auto;
+    transform: none;
+    bottom: $space-6;
+    width: 380px;
+  }
+}
+
+.close {
+  position: absolute;
+  top: $space-2;
+  right: $space-2;
+  width: 24px;
+  height: 24px;
+  border-radius: $radius-full;
+  display: grid;
+  place-items: center;
+  color: $color-text-tertiary;
+
+  &:hover {
+    background: $color-surface-alt;
+    color: $color-text-primary;
+  }
+}
+
+.icon {
+  grid-row: 1 / span 2;
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-lg;
+  background: linear-gradient(135deg, $color-primary, $color-primary-dark);
+  color: white;
+  display: grid;
+  place-items: center;
+  align-self: start;
+}
+
+.text {
+  h4 {
+    font-size: 1rem;
+    font-weight: $fw-semibold;
+    margin: 0 0 4px;
+  }
+  p {
+    font-size: $fs-small;
+    color: $color-text-secondary;
+    margin: 0;
+    line-height: $lh-snug;
+  }
+}
+
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: $space-2;
+  justify-content: flex-end;
+  margin-top: $space-2;
+}

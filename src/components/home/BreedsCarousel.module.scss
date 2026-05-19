@@ -1,0 +1,123 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-surface;
+}
+
+.scroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 80%;
+  gap: $space-4;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: $space-2 $space-2 $space-6;
+  margin: 0 (-$space-2);
+  @include scrollbar-hide;
+
+  @include sm-up {
+    grid-auto-columns: 45%;
+  }
+
+  @include md-up {
+    grid-auto-columns: 28%;
+    gap: $space-5;
+  }
+}
+
+.card {
+  scroll-snap-align: start;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-sm;
+  transition: box-shadow $duration-normal $ease-out;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+
+  a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.imgWrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.img {
+  object-fit: cover;
+  transition: transform $duration-slow $ease-out;
+
+  .card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.cardBadge {
+  position: absolute;
+  top: $space-3;
+  left: $space-3;
+}
+
+.cardBody {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: $fw-bold;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+.cardOrigin {
+  font-size: $fs-small;
+  color: $color-text-tertiary;
+  margin: 0;
+}
+
+.cardStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+  padding-top: $space-3;
+  margin-top: $space-2;
+  border-top: 1px solid $color-border;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $color-text-tertiary;
+  font-weight: $fw-medium;
+}
+
+.statValue {
+  font-size: 0.95rem;
+  font-weight: $fw-semibold;
+  color: $color-primary;
+}
+
+.viewAll {
+  display: flex;
+  justify-content: center;
+  margin-top: $space-4;
+}

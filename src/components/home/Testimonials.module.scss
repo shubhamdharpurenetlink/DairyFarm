@@ -1,0 +1,81 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: $color-surface;
+}
+
+.carousel {
+  max-width: 800px;
+  margin: 0 auto;
+
+  :global(.slick-dots li button) {
+    background: $color-primary !important;
+  }
+}
+
+.dots {
+  bottom: -40px !important;
+}
+
+.card {
+  position: relative;
+  padding: $space-10 $space-6;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-4;
+
+  @include sm-up {
+    padding: $space-12;
+  }
+}
+
+.quoteIcon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(168, 213, 186, 0.3);
+}
+
+.rate {
+  font-size: 18px !important;
+  color: $color-accent-gold !important;
+}
+
+.quote {
+  font-size: 1.2rem;
+  line-height: $lh-relaxed;
+  color: $color-text-primary;
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+
+  @include sm-up {
+    font-size: 1.35rem;
+  }
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-top: $space-2;
+}
+
+.avatar {
+  border-radius: $radius-full;
+  border: 3px solid $color-primary-light;
+}
+
+.name {
+  font-weight: $fw-bold;
+  color: $color-text-primary;
+}
+
+.city {
+  font-size: $fs-small;
+  color: $color-text-tertiary;
+}
