@@ -155,7 +155,7 @@ export default function CartPage() {
                 <Form
                   form={form}
                   layout="vertical"
-                  initialValues={{ paymentMode: "cod", state: "Haryana" }}
+                  initialValues={{ paymentMode: "cod", state: "Madhya Pradesh" }}
                   requiredMark={false}
                 >
                   <div className={styles.formGrid}>

@@ -13,7 +13,7 @@ import Newsletter from "@/features/home/components/Newsletter";
 export const metadata: Metadata = {
   title: "Laxmi Dairy Farm — Pure A2 Milk Since 1985",
   description:
-    "Premium A2 milk from indigenous Gir, Sahiwal & Tharparkar cows. Ethical, organic, family-run dairy in Karnal since 1985.",
+    "Premium A2 milk from indigenous Gir, Sahiwal & Tharparkar cows. Ethical, organic, family-run dairy in Pandhurna, Madhya Pradesh since 1985.",
 };
 
 export default async function HomePage({

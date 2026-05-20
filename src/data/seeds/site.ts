@@ -8,11 +8,11 @@ export const site: SiteSettings = {
   },
   foundedYear: 1985,
   address: {
-    en: "Village Anandpur, Tehsil Karnal, Haryana 132001, India",
-    hi: "गाँव आनंदपुर, तहसील करनाल, हरियाणा 132001, भारत",
+    en: "Village Jamlapani, Post Mohgaon, Tehsil Sausar, District Pandhurna, Madhya Pradesh – 480106, India",
+    hi: "गाँव जामलापानी, पोस्ट मोहगांव, तहसील सौंसर, जिला पांढुर्णा, मध्य प्रदेश – 480106, भारत",
   },
-  phone: "+91 98765 43210",
-  whatsapp: "+919876543210",
+  phone: "+91 89829 91614",
+  whatsapp: "+918982991614",
   email: "hello@laxmidairy.in",
   hours: {
     en: "Mon-Sun: 6 AM to 7 PM",
@@ -35,8 +35,8 @@ export const site: SiteSettings = {
     flatFeeInr: 49,
     minOrderInr: 199,
     serviceablePincodes: [
-      "132001", "132023", "132024", "132036", "132037",
-      "132039", "132041", "132054", "132107", "132113",
+      "480106", "480001", "480002", "480108", "480109",
+      "480110", "480111", "480334", "480337", "480447",
     ],
   },
 };
