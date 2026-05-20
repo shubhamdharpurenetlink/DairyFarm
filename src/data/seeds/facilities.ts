@@ -1,6 +1,7 @@
 import type { Facility } from "@/types";
+import { dummyImageAt } from "@/lib/dummyImage";
 
-const img = (id: number) => `https://picsum.photos/seed/fac${id}/800/600`;
+const img = (id: number) => dummyImageAt("facility", id, 800, 600);
 
 export const facilities: Facility[] = [
   {

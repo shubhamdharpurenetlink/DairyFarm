@@ -54,3 +54,7 @@ public/fallback-*
 Thumbs.db
 .idea/
 .vscode/
+
+# local debug / preview artefacts
+.preview-imgs/
+.smoke-shots/

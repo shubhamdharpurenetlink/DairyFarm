@@ -1,6 +1,7 @@
 import type { TrainingProgram } from "@/types";
+import { dummyImageAt } from "@/lib/dummyImage";
 
-const img = (id: number) => `https://picsum.photos/seed/train${id}/800/500`;
+const img = (id: number) => dummyImageAt("training", id, 800, 500);
 const avatar = (id: number) => `https://i.pravatar.cc/200?u=trainer${id}`;
 
 export const trainings: TrainingProgram[] = [

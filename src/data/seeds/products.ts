@@ -1,7 +1,24 @@
 import type { Product } from "@/types";
+import { dummyImageAt } from "@/lib/dummyImage";
+import type { DummyImageCategory } from "@/lib/dummyImage";
 
-const img = (seed: string, w = 800, h = 800) =>
-  `https://picsum.photos/seed/${seed}/${w}/${h}`;
+const CATEGORY_TO_POOL: Record<Product["category"], DummyImageCategory> = {
+  milk: "milk",
+  ghee: "ghee",
+  curd: "curd",
+  paneer: "paneer",
+  butter: "butter",
+  mava: "mava",
+  sweets: "sweets",
+  other: "milk",
+};
+
+const img = (
+  category: Product["category"],
+  index: number,
+  w = 800,
+  h = 800,
+) => dummyImageAt(CATEGORY_TO_POOL[category], index, w, h);
 
 const now = "2026-05-19T00:00:00.000Z";
 
@@ -19,8 +36,8 @@ export const products: Product[] = [
       hi: "हमारा प्रमुख A2 दूध हमारी अपनी गिर गायों के झुंड से आता है जो खुले में चरती हैं। हल्का पाश्चुराइज़, बिना होमोजेनाइज़ किया हुआ, A2 बीटा-कैसिइन प्रोटीन से भरपूर जो सामान्य A1 दूध की तुलना में पचाने में आसान है।",
     },
     category: "milk",
-    primaryImage: img("milk-1"),
-    images: [img("milk-1"), img("milk-2"), img("milk-3")],
+    primaryImage: img("milk", 0),
+    images: [img("milk", 0), img("milk", 1), img("milk", 2)],
     variants: [
       { id: "v1", label: { en: "500 ml Pouch", hi: "500 मिली पैक" }, unit: "ml", size: 500, priceInr: 45, mrpInr: 50, stockQty: 120, sku: "MILK-GIR-500" },
       { id: "v2", label: { en: "1 L Bottle", hi: "1 लीटर बोतल" }, unit: "L", size: 1, priceInr: 85, mrpInr: 95, stockQty: 80, sku: "MILK-GIR-1L" },
@@ -60,8 +77,8 @@ export const products: Product[] = [
       hi: "हमारी साहीवाल गायों से हल्का टोन्ड दूध। कम वसा (~3%) रोज़ाना की चाय, कॉफी और अनाज के लिए परफेक्ट।",
     },
     category: "milk",
-    primaryImage: img("milk-4"),
-    images: [img("milk-4"), img("milk-5")],
+    primaryImage: img("milk", 1),
+    images: [img("milk", 1), img("milk", 2)],
     variants: [
       { id: "v1", label: { en: "500 ml Pouch", hi: "500 मिली पैक" }, unit: "ml", size: 500, priceInr: 35, stockQty: 90, sku: "MILK-SHW-500" },
       { id: "v2", label: { en: "1 L Pouch", hi: "1 लीटर पैक" }, unit: "L", size: 1, priceInr: 65, stockQty: 60, sku: "MILK-SHW-1L" },
@@ -91,8 +108,8 @@ export const products: Product[] = [
       hi: "प्राचीन वैदिक विधि से बना — A2 दूध को जमाकर, हाथ से मथकर मक्खन निकाला जाता है, फिर धीमी आँच पर सुनहरे घी में तब्दील किया जाता है। दानेदार बनावट, दिव्य सुगंध, प्राकृतिक रूप से लैक्टोज-मुक्त।",
     },
     category: "ghee",
-    primaryImage: img("ghee-1"),
-    images: [img("ghee-1"), img("ghee-2"), img("ghee-3")],
+    primaryImage: img("ghee", 0),
+    images: [img("ghee", 0), img("ghee", 1), img("ghee", 2)],
     variants: [
       { id: "v1", label: { en: "250 ml Jar", hi: "250 मिली जार" }, unit: "ml", size: 250, priceInr: 599, mrpInr: 700, stockQty: 45, sku: "GHEE-BIL-250" },
       { id: "v2", label: { en: "500 ml Jar", hi: "500 मिली जार" }, unit: "ml", size: 500, priceInr: 1099, mrpInr: 1300, stockQty: 30, sku: "GHEE-BIL-500" },
@@ -132,8 +149,8 @@ export const products: Product[] = [
       hi: "मलाईदार भैंस के दूध से बना यह घी ज़्यादा स्वादिष्ट और उच्च पिघलने वाले बिंदु के साथ — हलवा, मिठाई और तलने के लिए परफेक्ट।",
     },
     category: "ghee",
-    primaryImage: img("ghee-4"),
-    images: [img("ghee-4"), img("ghee-5")],
+    primaryImage: img("ghee", 1),
+    images: [img("ghee", 1), img("ghee", 2)],
     variants: [
       { id: "v1", label: { en: "500 ml Jar", hi: "500 मिली जार" }, unit: "ml", size: 500, priceInr: 749, stockQty: 25, sku: "GHEE-BUF-500" },
       { id: "v2", label: { en: "1 L Tin", hi: "1 लीटर टिन" }, unit: "L", size: 1, priceInr: 1399, stockQty: 14, sku: "GHEE-BUF-1L" },
@@ -162,8 +179,8 @@ export const products: Product[] = [
       hi: "मिट्टी के बर्तनों में प्राकृतिक खटाई से धीरे-धीरे जमाया गया। प्राकृतिक रूप से प्रोबायोटिक, हल्का और मलाईदार। रायता, लस्सी और दही चावल के लिए परफेक्ट।",
     },
     category: "curd",
-    primaryImage: img("dahi-1"),
-    images: [img("dahi-1"), img("dahi-2")],
+    primaryImage: img("curd", 0),
+    images: [img("curd", 0), img("curd", 1)],
     variants: [
       { id: "v1", label: { en: "200 g Cup", hi: "200 ग्राम कप" }, unit: "g", size: 200, priceInr: 35, stockQty: 80, sku: "DAHI-CRM-200" },
       { id: "v2", label: { en: "500 g Tub", hi: "500 ग्राम डिब्बा" }, unit: "g", size: 500, priceInr: 75, stockQty: 50, sku: "DAHI-CRM-500" },
@@ -196,8 +213,8 @@ export const products: Product[] = [
       hi: "हर सुबह हमारे A2 दही से बनाई गई, लकड़ी की मथानी से मथी और हल्की मीठी की गई। मलाई से सजी। पारंपरिक मटके में।",
     },
     category: "curd",
-    primaryImage: img("lassi-1"),
-    images: [img("lassi-1")],
+    primaryImage: img("curd", 2),
+    images: [img("curd", 2), img("curd", 1)],
     variants: [
       { id: "v1", label: { en: "250 ml Matka", hi: "250 मिली मटका" }, unit: "ml", size: 250, priceInr: 49, stockQty: 60, sku: "LASSI-SWT-250" },
       { id: "v2", label: { en: "500 ml Matka", hi: "500 मिली मटका" }, unit: "ml", size: 500, priceInr: 89, stockQty: 35, sku: "LASSI-SWT-500" },
@@ -223,8 +240,8 @@ export const products: Product[] = [
       hi: "उसी सुबह ताज़े A2 दूध और प्राकृतिक खटाई से बनाया गया। मुलायम बनावट, हल्का स्वाद — पनीर बटर मसाला, पालक पनीर या ग्रिल के लिए परफेक्ट।",
     },
     category: "paneer",
-    primaryImage: img("paneer-1"),
-    images: [img("paneer-1"), img("paneer-2")],
+    primaryImage: img("paneer", 0),
+    images: [img("paneer", 0), img("paneer", 1), img("paneer", 2)],
     variants: [
       { id: "v1", label: { en: "200 g Block", hi: "200 ग्राम ब्लॉक" }, unit: "g", size: 200, priceInr: 99, stockQty: 50, sku: "PNR-A2-200" },
       { id: "v2", label: { en: "500 g Block", hi: "500 ग्राम ब्लॉक" }, unit: "g", size: 500, priceInr: 229, stockQty: 30, sku: "PNR-A2-500" },
@@ -255,8 +272,8 @@ export const products: Product[] = [
       hi: "ताज़ी A2 मलाई को पारंपरिक मथानी से हाथ से मथकर बनाया गया। न नमक, न प्रिज़र्वेटिव — पराठों, बच्चों और घर में घी बनाने के लिए शुद्ध मक्खन।",
     },
     category: "butter",
-    primaryImage: img("butter-1"),
-    images: [img("butter-1"), img("butter-2")],
+    primaryImage: img("butter", 0),
+    images: [img("butter", 0)],
     variants: [
       { id: "v1", label: { en: "200 g Tub", hi: "200 ग्राम डिब्बा" }, unit: "g", size: 200, priceInr: 220, stockQty: 35, sku: "BTR-WHT-200" },
       { id: "v2", label: { en: "500 g Tub", hi: "500 ग्राम डिब्बा" }, unit: "g", size: 500, priceInr: 530, stockQty: 18, sku: "BTR-WHT-500" },
@@ -286,8 +303,8 @@ export const products: Product[] = [
       hi: "शुद्ध A2 दूध को घंटों धीमी लकड़ी की आग पर पकाकर गाढ़ा, मलाईदार मावा। गुलाब जामुन, पेड़ा, गाजर हलवा और बर्फी के लिए परफेक्ट।",
     },
     category: "mava",
-    primaryImage: img("mawa-1"),
-    images: [img("mawa-1"), img("mawa-2")],
+    primaryImage: img("mava", 0),
+    images: [img("mava", 0), img("mava", 1)],
     variants: [
       { id: "v1", label: { en: "250 g Pack", hi: "250 ग्राम पैक" }, unit: "g", size: 250, priceInr: 199, stockQty: 30, sku: "MWA-SLW-250" },
       { id: "v2", label: { en: "500 g Pack", hi: "500 ग्राम पैक" }, unit: "g", size: 500, priceInr: 379, stockQty: 18, sku: "MWA-SLW-500" },
@@ -314,8 +331,8 @@ export const products: Product[] = [
       hi: "अपने धीमी आँच के मावा से हाथ से बने पेड़े, खांड से हल्के मीठे, हरी इलायची और कश्मीरी केसर से स्वादिष्ट।",
     },
     category: "sweets",
-    primaryImage: img("peda-1"),
-    images: [img("peda-1"), img("peda-2")],
+    primaryImage: img("sweets", 0),
+    images: [img("sweets", 0), img("sweets", 1)],
     variants: [
       { id: "v1", label: { en: "250 g Box (10 pcs)", hi: "250 ग्राम बॉक्स (10 पीस)" }, unit: "g", size: 250, priceInr: 299, stockQty: 28, sku: "SWT-PDA-250" },
       { id: "v2", label: { en: "500 g Box (20 pcs)", hi: "500 ग्राम बॉक्स (20 पीस)" }, unit: "g", size: 500, priceInr: 549, stockQty: 14, sku: "SWT-PDA-500" },
@@ -340,8 +357,8 @@ export const products: Product[] = [
       hi: "A2 दूध को गाढ़ा होने तक धीमी आँच पर पकाया, पिस्ता, केसर और इलायची से सजाया। ठंडा परोसें या मालपुआ के साथ।",
     },
     category: "sweets",
-    primaryImage: img("rabri-1"),
-    images: [img("rabri-1")],
+    primaryImage: img("sweets", 1),
+    images: [img("sweets", 1), img("sweets", 0)],
     variants: [
       { id: "v1", label: { en: "200 g Cup", hi: "200 ग्राम कप" }, unit: "g", size: 200, priceInr: 159, stockQty: 22, sku: "SWT-RBR-200" },
       { id: "v2", label: { en: "500 g Tub", hi: "500 ग्राम डिब्बा" }, unit: "g", size: 500, priceInr: 359, stockQty: 12, sku: "SWT-RBR-500" },

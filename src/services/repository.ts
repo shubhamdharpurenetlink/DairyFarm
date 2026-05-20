@@ -14,12 +14,16 @@ const isBrowser = typeof window !== "undefined" && typeof localStorage !== "unde
 export class Repository<T> {
   private cache: T[] | null = null;
   private listeners = new Set<(items: T[]) => void>();
+  private readonly versionKey: string;
 
   constructor(
     private readonly storageKey: string,
     private readonly seed: readonly T[],
     private readonly idKey: EntityKey<T>,
-  ) {}
+    private readonly seedVersion: string = "1",
+  ) {
+    this.versionKey = `${storageKey}.__v`;
+  }
 
   private read(): T[] {
     if (this.cache) return this.cache;
@@ -28,12 +32,14 @@ export class Repository<T> {
       return this.cache;
     }
     try {
+      const storedVersion = localStorage.getItem(this.versionKey);
       const raw = localStorage.getItem(this.storageKey);
-      if (raw) {
+      if (raw && storedVersion === this.seedVersion) {
         this.cache = JSON.parse(raw) as T[];
       } else {
         this.cache = [...this.seed];
         this.persist();
+        localStorage.setItem(this.versionKey, this.seedVersion);
       }
     } catch {
       this.cache = [...this.seed];

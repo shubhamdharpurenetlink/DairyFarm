@@ -1,7 +1,8 @@
 import type { CowBreed } from "@/types";
+import { dummyImageAt } from "@/lib/dummyImage";
 
 const img = (id: number, w = 800, h = 600) =>
-  `https://picsum.photos/seed/cow${id}/${w}/${h}`;
+  dummyImageAt("cow", id, w, h);
 
 export const cows: CowBreed[] = [
   {

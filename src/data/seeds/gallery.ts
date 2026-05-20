@@ -1,7 +1,8 @@
 import type { GalleryItem } from "@/types";
+import { dummyImageAt } from "@/lib/dummyImage";
 
 const img = (id: number, w: number, h: number) =>
-  `https://picsum.photos/seed/g${id}/${w}/${h}`;
+  dummyImageAt("farm", id, w, h);
 const ytThumb = (id: string) => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
 
 export const gallery: GalleryItem[] = [
