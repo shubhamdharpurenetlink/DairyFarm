@@ -1,0 +1,243 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.page {
+  padding-block: clamp(2rem, 5vw, 4rem);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-12;
+  align-items: start;
+
+  @include md-down {
+    grid-template-columns: 1fr;
+    gap: $space-8;
+  }
+}
+
+.gallery {
+  position: sticky;
+  top: calc(#{$header-height} + #{$space-6});
+
+  @include md-down {
+    position: static;
+  }
+}
+
+.heroImage {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  background: $color-surface-alt;
+  border: 1px solid $color-border;
+}
+
+.heroImg {
+  object-fit: cover;
+}
+
+.heroBadge {
+  position: absolute;
+  top: $space-4;
+  left: $space-4;
+  background: $color-primary;
+  color: white;
+  padding: 6px 14px;
+  font-size: $fs-small;
+  font-weight: $fw-semibold;
+  border-radius: $radius-full;
+}
+
+.thumbs {
+  display: flex;
+  gap: $space-3;
+  margin-top: $space-4;
+  overflow-x: auto;
+  @include scrollbar-hide;
+}
+
+.thumb {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: $radius-md;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: $color-surface-alt;
+
+  &.thumbActive {
+    border-color: $color-primary;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.softTag {
+  background: $color-surface-alt !important;
+  color: $color-text-secondary !important;
+  border: none !important;
+}
+
+.title {
+  @include h1;
+  margin: 0;
+  color: $color-text-primary;
+}
+
+.short {
+  font-size: 1.1rem;
+  color: $color-text-secondary;
+  line-height: $lh-relaxed;
+  margin: 0;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  margin-bottom: $space-1;
+}
+
+.stock {
+  font-size: $fs-small;
+  color: $color-success;
+  font-weight: $fw-medium;
+}
+
+.divider {
+  height: 1px;
+  background: $color-border;
+  margin: $space-2 0;
+}
+
+.label {
+  font-size: $fs-small;
+  font-weight: $fw-semibold;
+  color: $color-text-primary;
+  margin-top: $space-2;
+}
+
+.qtyRow {
+  display: flex;
+  gap: $space-3;
+  flex-wrap: wrap;
+}
+
+.qtyStepper {
+  display: inline-flex;
+  align-items: center;
+  background: $color-surface;
+  border: 1.5px solid $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  button {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: $color-text-primary;
+    display: grid;
+    place-items: center;
+
+    &:hover {
+      background: $color-surface-alt;
+    }
+  }
+
+  span {
+    min-width: 40px;
+    text-align: center;
+    font-weight: $fw-semibold;
+  }
+}
+
+.addBtn {
+  flex: 1;
+  min-width: 200px;
+}
+
+.perks {
+  list-style: none;
+  padding: 0;
+  margin: $space-4 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: $space-3;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: $fs-small;
+    color: $color-text-secondary;
+    padding: $space-3;
+    background: rgba(168, 213, 186, 0.08);
+    border-radius: $radius-md;
+
+    svg {
+      color: $color-primary;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.tabsSection {
+  margin-top: $space-16;
+}
+
+.long {
+  color: $color-text-secondary;
+  font-size: 1rem;
+  line-height: $lh-relaxed;
+  margin: 0;
+}
+
+.nutritionTable {
+  width: 100%;
+  max-width: 400px;
+  border-collapse: collapse;
+
+  td {
+    padding: $space-2 0;
+    border-bottom: 1px solid $color-border;
+    color: $color-text-secondary;
+
+    &:last-child {
+      text-align: right;
+      color: $color-text-primary;
+      font-weight: $fw-semibold;
+    }
+  }
+}
+
+.related {
+  margin-top: $space-16;
+}
+
+.relatedTitle {
+  @include h2;
+  margin-bottom: $space-6;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: $space-5;
+}

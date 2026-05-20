@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import TrainingList from "@/components/training/TrainingList";
+import TrainingList from "@/features/training/components/TrainingList";
 
 export async function generateMetadata({
   params,

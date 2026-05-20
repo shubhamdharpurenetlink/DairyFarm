@@ -1,0 +1,39 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  margin-bottom: $space-10;
+}
+
+.toolbar {
+  display: flex;
+  gap: $space-3;
+  flex-wrap: wrap;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 240px;
+}
+
+.sortSelect {
+  min-width: 200px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: $space-6;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-4;
+  }
+}

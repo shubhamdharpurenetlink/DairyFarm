@@ -1,0 +1,33 @@
+@use "@/styles/variables" as *;
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.chip {
+  padding: $space-2 $space-4;
+  border-radius: $radius-full;
+  border: 1.5px solid $color-border;
+  background: $color-surface;
+  color: $color-text-secondary;
+  font-size: $fs-small;
+  font-weight: $fw-medium;
+  cursor: pointer;
+  transition: all $duration-fast $ease-out;
+  white-space: nowrap;
+
+  &:hover {
+    color: $color-primary;
+    border-color: $color-primary-light;
+    background: rgba(168, 213, 186, 0.1);
+  }
+
+  &.active {
+    background: $color-primary;
+    color: $color-text-inverse;
+    border-color: $color-primary;
+    font-weight: $fw-semibold;
+  }
+}

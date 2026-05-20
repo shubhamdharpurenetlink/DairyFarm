@@ -1,0 +1,79 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.sider {
+  border-right: 1px solid $color-border;
+  background: $color-surface !important;
+  height: 100vh;
+  position: sticky !important;
+  top: 0;
+  overflow: auto;
+
+  @include sm-down {
+    display: none !important;
+  }
+}
+
+.drawer :global(.ant-drawer-body) {
+  background: $color-surface;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-5 $space-5;
+  border-bottom: 1px solid $color-border;
+  font-weight: $fw-bold;
+  color: $color-text-primary;
+
+  small {
+    display: block;
+    font-weight: $fw-regular;
+    color: $color-text-tertiary;
+    font-size: $fs-caption;
+    margin-top: 2px;
+  }
+}
+
+.brandIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-md;
+  background: linear-gradient(135deg, $color-primary, $color-primary-dark);
+  color: white;
+  display: grid;
+  place-items: center;
+}
+
+.groupLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $color-text-tertiary;
+  font-weight: $fw-semibold;
+  padding-inline: $space-4;
+}
+
+.menu {
+  border-inline-end: none !important;
+  padding: $space-3 $space-2 !important;
+
+  :global(.ant-menu-item) {
+    border-radius: $radius-md !important;
+    margin-block: 2px !important;
+  }
+}
+
+.footer {
+  padding: $space-4 $space-5;
+  border-top: 1px solid $color-border;
+}
+
+.exit {
+  color: $color-text-secondary;
+  font-size: $fs-small;
+  text-decoration: none;
+
+  &:hover { color: $color-primary; }
+}

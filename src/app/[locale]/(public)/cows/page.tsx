@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import CowsListing from "@/components/cows/CowsListing";
+import CowsListing from "@/features/cows/components/CowsListing";
 
 export async function generateMetadata({
   params,

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import TrainingDetail from "@/components/training/TrainingDetail";
-import { trainings, getTrainingBySlug } from "@/data/trainings";
+import TrainingDetail from "@/features/training/components/TrainingDetail";
+import { trainingService } from "@/services/entityServices";
+
+export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return trainings.map((t) => ({ slug: t.slug }));
+  return trainingService.list().map((t) => ({ slug: t.slug }));
 }
 
 export async function generateMetadata({
@@ -14,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug, locale } = await params;
-  const p = getTrainingBySlug(slug);
+  const p = trainingService.getBySlug(slug);
   if (!p) return {};
   const title = locale === "hi" ? p.title.hi : p.title.en;
   const desc = locale === "hi" ? p.shortDesc.hi : p.shortDesc.en;
@@ -28,7 +30,7 @@ export default async function TrainingDetailPage({
 }) {
   const { slug, locale } = await params;
   setRequestLocale(locale);
-  const p = getTrainingBySlug(slug);
+  const p = trainingService.getBySlug(slug);
   if (!p) notFound();
   return <TrainingDetail program={p} />;
 }

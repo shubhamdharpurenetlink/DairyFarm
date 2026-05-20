@@ -1,0 +1,79 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: $space-6;
+  background:
+    radial-gradient(ellipse at top, rgba(168, 213, 186, 0.3), transparent 60%),
+    radial-gradient(ellipse at bottom, rgba(245, 230, 200, 0.4), transparent 60%),
+    $color-bg;
+}
+
+.card {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-6;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.logoIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: $radius-lg;
+  background: linear-gradient(135deg, $color-primary, $color-primary-dark);
+  color: white;
+  display: grid;
+  place-items: center;
+  box-shadow: $shadow-md;
+}
+
+.brandTitle {
+  @include h3;
+  margin: 0;
+}
+
+.formCard {
+  width: 100%;
+  border-radius: $radius-xl !important;
+  box-shadow: $shadow-lg !important;
+  border: 1px solid $color-border;
+}
+
+.head {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  margin-bottom: $space-4;
+
+  h2 {
+    @include h4;
+    margin: 0;
+  }
+
+  p {
+    color: $color-text-secondary;
+    margin: 0;
+    font-size: $fs-small;
+  }
+}
+
+.headIcon {
+  color: $color-primary;
+}
+
+.alert {
+  margin-bottom: $space-4;
+}

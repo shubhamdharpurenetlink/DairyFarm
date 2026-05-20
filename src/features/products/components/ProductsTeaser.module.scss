@@ -1,0 +1,22 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.section {
+  background: linear-gradient(180deg, transparent 0%, $color-surface-alt 100%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: $space-5;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-3;
+  }
+}
+
+.viewAll {
+  margin-top: $space-12;
+  text-align: center;
+}

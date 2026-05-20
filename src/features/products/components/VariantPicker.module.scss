@@ -1,0 +1,60 @@
+@use "@/styles/variables" as *;
+
+.picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: $space-3 $space-4;
+  border: 1.5px solid $color-border;
+  border-radius: $radius-md;
+  background: $color-surface;
+  cursor: pointer;
+  min-width: 110px;
+  transition: all $duration-fast $ease-out;
+  position: relative;
+
+  &:hover:not(:disabled) {
+    border-color: $color-primary-light;
+    background: rgba(168, 213, 186, 0.06);
+  }
+
+  &.active {
+    border-color: $color-primary;
+    background: rgba(46, 125, 91, 0.06);
+    box-shadow: 0 0 0 3px rgba(46, 125, 91, 0.08);
+  }
+
+  &.out {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+.label {
+  font-size: $fs-small;
+  font-weight: $fw-semibold;
+  color: $color-text-primary;
+}
+
+.price {
+  font-size: $fs-caption;
+  color: $color-text-secondary;
+}
+
+.outBadge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 10px;
+  background: $color-error;
+  color: white;
+  padding: 2px 6px;
+  border-radius: $radius-full;
+}

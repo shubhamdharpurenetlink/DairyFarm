@@ -1,0 +1,57 @@
+@use "@/styles/variables" as *;
+
+.wrap {
+  padding-block: $space-8 $space-12;
+}
+
+.icon {
+  color: $color-primary;
+}
+
+.detailsWrap {
+  margin-top: $space-8;
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+
+  :global(.ant-descriptions-title) {
+    font-size: $fs-h4;
+  }
+}
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: $space-4 $space-5;
+  background: $color-surface-alt;
+  border-radius: $radius-md;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: $space-4;
+    font-size: $fs-small;
+    color: $color-text-primary;
+    padding-block: $space-1;
+
+    &:not(:last-child) {
+      border-bottom: 1px dashed $color-border;
+    }
+  }
+}
+
+.next {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-4;
+  background: rgba($color-primary, 0.08);
+  border: 1px solid rgba($color-primary, 0.3);
+  border-radius: $radius-md;
+  color: $color-primary-dark;
+  font-weight: $fw-medium;
+  font-size: $fs-small;
+}

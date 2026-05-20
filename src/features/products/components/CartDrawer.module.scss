@@ -1,0 +1,147 @@
+@use "@/styles/variables" as *;
+
+.title {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $space-12;
+  gap: $space-4;
+  flex: 1;
+}
+
+.shopBtn {
+  margin-top: $space-2;
+}
+
+.lines {
+  flex: 1;
+  overflow-y: auto;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: $space-3;
+  align-items: flex-start;
+  padding-bottom: $space-4;
+  border-bottom: 1px solid $color-border;
+}
+
+.thumb {
+  position: relative;
+  width: 80px;
+  aspect-ratio: 1;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $color-surface-alt;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.name {
+  font-weight: $fw-semibold;
+  color: $color-text-primary;
+  text-decoration: none;
+  font-size: $fs-small;
+  line-height: 1.3;
+
+  &:hover { color: $color-primary; }
+}
+
+.variant {
+  font-size: $fs-caption;
+  color: $color-text-tertiary;
+}
+
+.qtyRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  gap: $space-2;
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  background: $color-surface-alt;
+  border-radius: $radius-md;
+
+  button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    color: $color-text-primary;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    &:hover { background: $color-border; }
+  }
+
+  span {
+    min-width: 24px;
+    text-align: center;
+    font-size: $fs-small;
+    font-weight: $fw-semibold;
+  }
+}
+
+.lineTotal {
+  font-weight: $fw-bold;
+  color: $color-text-primary;
+  font-size: $fs-small;
+}
+
+.removeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: $color-text-tertiary;
+  padding: 6px;
+  border-radius: $radius-md;
+
+  &:hover {
+    color: $color-error;
+    background: rgba(255, 77, 79, 0.08);
+  }
+}
+
+.summary {
+  border-top: 1px solid $color-border;
+  padding: $space-4;
+  background: $color-surface-alt;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: $fs-small;
+  color: $color-text-secondary;
+}
+
+.total {
+  font-size: 1.1rem;
+  font-weight: $fw-bold;
+  color: $color-text-primary;
+  padding-top: $space-3;
+  border-top: 1px dashed $color-border;
+}

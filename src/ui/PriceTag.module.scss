@@ -1,0 +1,38 @@
+@use "@/styles/variables" as *;
+
+.priceTag {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: $space-2;
+}
+
+.align-start { justify-content: flex-start; }
+.align-center { justify-content: center; }
+.align-end { justify-content: flex-end; }
+
+.price {
+  font-weight: $fw-bold;
+  color: $color-text-primary;
+  font-family: $font-heading;
+  line-height: 1;
+}
+
+.mrp {
+  font-size: 0.9em;
+  text-decoration: line-through;
+  color: $color-text-tertiary;
+}
+
+.discount {
+  font-size: 0.75rem;
+  font-weight: $fw-bold;
+  color: $color-primary;
+  background: rgba(46, 125, 91, 0.08);
+  padding: 2px 8px;
+  border-radius: $radius-full;
+}
+
+.sm .price { font-size: 1rem; }
+.md .price { font-size: 1.25rem; }
+.lg .price { font-size: 1.75rem; }

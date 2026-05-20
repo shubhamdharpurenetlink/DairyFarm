@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import CowDetail from "@/components/cows/CowDetail";
-import { cows, getCowBySlug } from "@/data/cows";
+import CowDetail from "@/features/cows/components/CowDetail";
+import { cowService } from "@/services/entityServices";
+
+export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return cows.map((c) => ({ slug: c.slug }));
+  return cowService.list().map((c) => ({ slug: c.slug }));
 }
 
 export async function generateMetadata({
@@ -14,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
   const { slug, locale } = await params;
-  const cow = getCowBySlug(slug);
+  const cow = cowService.getBySlug(slug);
   if (!cow) return {};
   const name = locale === "hi" ? cow.nameHi : cow.nameEn;
   const desc = locale === "hi" ? cow.shortDesc.hi : cow.shortDesc.en;
@@ -28,7 +30,7 @@ export default async function CowDetailPage({
 }) {
   const { slug, locale } = await params;
   setRequestLocale(locale);
-  const cow = getCowBySlug(slug);
+  const cow = cowService.getBySlug(slug);
   if (!cow) notFound();
   return <CowDetail cow={cow} />;
 }

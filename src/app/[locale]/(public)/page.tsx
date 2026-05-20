@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import Hero from "@/components/home/Hero";
-import Features from "@/components/home/Features";
-import OurStory from "@/components/home/OurStory";
-import BreedsCarousel from "@/components/home/BreedsCarousel";
-import KnowledgePreview from "@/components/home/KnowledgePreview";
-import TrainingPreview from "@/components/home/TrainingPreview";
-import Testimonials from "@/components/home/Testimonials";
-import Newsletter from "@/components/home/Newsletter";
+import Hero from "@/features/home/components/Hero";
+import Features from "@/features/home/components/Features";
+import OurStory from "@/features/home/components/OurStory";
+import ProductsTeaser from "@/features/products/components/ProductsTeaser";
+import BreedsCarousel from "@/features/home/components/BreedsCarousel";
+import KnowledgePreview from "@/features/home/components/KnowledgePreview";
+import TrainingPreview from "@/features/home/components/TrainingPreview";
+import Testimonials from "@/features/home/components/Testimonials";
+import Newsletter from "@/features/home/components/Newsletter";
 
 export const metadata: Metadata = {
   title: "Laxmi Dairy Farm — Pure A2 Milk Since 1985",
@@ -28,6 +29,7 @@ export default async function HomePage({
       <Hero />
       <Features />
       <OurStory />
+      <ProductsTeaser />
       <BreedsCarousel />
       <KnowledgePreview />
       <TrainingPreview />

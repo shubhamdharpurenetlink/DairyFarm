@@ -1,15 +1,14 @@
-import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import AdminDashboard from "@/components/admin/AdminDashboard";
+import DashboardView from "@/features/admin/modules/dashboard/DashboardView";
 
-export const metadata: Metadata = { title: "Admin Dashboard" };
+export const metadata = { title: "Admin · Dashboard" };
 
-export default async function DashboardPage({
+export default async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <AdminDashboard />;
+  return <DashboardView />;
 }

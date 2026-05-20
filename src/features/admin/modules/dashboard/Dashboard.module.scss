@@ -1,0 +1,212 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: $space-4;
+  margin-bottom: $space-6;
+}
+
+.statCard {
+  border-radius: $radius-lg !important;
+  border: 1px solid $color-border;
+  background: $color-surface;
+  transition: transform $duration-fast $ease-out, box-shadow $duration-fast $ease-out;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  :global(.ant-statistic-title) {
+    color: $color-text-secondary;
+    font-size: $fs-small;
+    margin-bottom: $space-1;
+  }
+}
+
+.statRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.statSub {
+  font-size: $fs-caption;
+  color: $color-text-tertiary;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+.statIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: $radius-lg;
+  display: grid;
+  place-items: center;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: $space-4;
+  margin-bottom: $space-6;
+
+  @include md-down {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  border-radius: $radius-lg !important;
+
+  :global(.ant-card-head-title) {
+    font-weight: $fw-semibold;
+  }
+}
+
+.panelTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.empty {
+  text-align: center;
+  color: $color-text-tertiary;
+  padding: $space-6 0;
+  margin: 0;
+}
+
+.orderList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-3;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    background: $color-surface;
+  }
+}
+
+.orderInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.orderNum {
+  font-weight: $fw-semibold;
+  color: $color-text-primary;
+  text-decoration: none;
+
+  &:hover { color: $color-primary; }
+}
+
+.orderMeta {
+  font-size: $fs-caption;
+  color: $color-text-tertiary;
+}
+
+.orderRight {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.orderAmt {
+  font-weight: $fw-bold;
+  font-size: $fs-small;
+}
+
+.enquiryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  li {
+    display: flex;
+    gap: $space-3;
+  }
+}
+
+.enquiryBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  p {
+    color: $color-text-secondary;
+    font-size: $fs-small;
+    margin: 0;
+    @include text-clamp(2);
+  }
+}
+
+.enquiryHead {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.time {
+  font-size: $fs-caption;
+  color: $color-text-tertiary;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.quickActions {
+  border-radius: $radius-lg !important;
+}
+
+.actionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: $space-3;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  color: $color-text-primary;
+  text-decoration: none;
+  font-weight: $fw-medium;
+  font-size: $fs-small;
+  transition: all $duration-fast $ease-out;
+
+  &:hover {
+    border-color: $color-primary;
+    background: rgba(46, 125, 91, 0.04);
+    color: $color-primary;
+  }
+
+  svg:last-child {
+    margin-left: auto;
+  }
+}
+
+.actionDot {
+  width: 8px;
+  height: 8px;
+  border-radius: $radius-full;
+  flex-shrink: 0;
+}

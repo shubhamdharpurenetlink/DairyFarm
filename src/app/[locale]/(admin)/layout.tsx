@@ -1,7 +1,13 @@
-export default function AdminLayout({
+import { AdminGuard, AdminShell } from "@/features/admin/components";
+
+export default function AdminLayoutWrapper({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <main>{children}</main>;
+  return (
+    <AdminGuard>
+      <AdminShell>{children}</AdminShell>
+    </AdminGuard>
+  );
 }

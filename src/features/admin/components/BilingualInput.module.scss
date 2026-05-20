@@ -1,0 +1,35 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.field {
+  margin-bottom: $space-4;
+}
+
+.label {
+  display: block;
+  font-size: $fs-small;
+  font-weight: $fw-semibold;
+  margin-bottom: $space-2;
+  color: $color-text-primary;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lang {
+  font-size: $fs-caption;
+  color: $color-text-tertiary;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hindi {
+  font-family: $font-hindi !important;
+}

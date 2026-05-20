@@ -1,8 +1,11 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import MobileBottomNav from "@/components/layout/MobileBottomNav";
-import WhatsAppFAB from "@/components/contact/WhatsAppFAB";
-import PWAInstallPrompt from "@/components/shared/PWAInstallPrompt";
+import {
+  Header,
+  Footer,
+  MobileBottomNav,
+  WhatsAppFAB,
+  PWAInstallPrompt,
+} from "@/layout";
+import CartDrawer from "@/features/products/components/CartDrawer";
 
 export default function PublicLayout({
   children,
@@ -17,6 +20,7 @@ export default function PublicLayout({
       <MobileBottomNav />
       <WhatsAppFAB />
       <PWAInstallPrompt />
+      <CartDrawer />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import GalleryView from "@/components/gallery/GalleryView";
+import GalleryView from "@/features/gallery/components/GalleryView";
 
 export async function generateMetadata({
   params,

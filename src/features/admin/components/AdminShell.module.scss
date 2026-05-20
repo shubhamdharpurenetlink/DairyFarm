@@ -1,0 +1,127 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.shell {
+  min-height: 100vh;
+  background: $color-bg;
+}
+
+.main {
+  background: $color-bg;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: $z-header;
+  background: $color-surface !important;
+  border-bottom: 1px solid $color-border;
+  padding: 0 $space-6 !important;
+  height: 64px !important;
+  line-height: 64px !important;
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+
+  @include mobile {
+    padding: 0 $space-3 !important;
+  }
+}
+
+.brand {
+  display: none;
+  align-items: center;
+  gap: $space-2;
+  color: $color-primary;
+  font-weight: $fw-bold;
+
+  @include sm-down {
+    display: inline-flex;
+  }
+}
+
+.menuBtn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  background: $color-surface;
+  cursor: pointer;
+  place-items: center;
+  color: $color-text-primary;
+
+  @include sm-down {
+    display: grid;
+  }
+}
+
+.topbarRight {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.viewSite {
+  @include sm-down { display: none; }
+}
+
+.userBtn {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: $radius-md;
+
+  &:hover { background: $color-surface-alt; }
+}
+
+.userMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+
+  @include sm-down { display: none; }
+}
+
+.userName {
+  font-weight: $fw-semibold;
+  font-size: $fs-small;
+  color: $color-text-primary;
+}
+
+.userRole {
+  font-size: $fs-caption;
+  color: $color-text-tertiary;
+  text-transform: capitalize;
+}
+
+.content {
+  padding: $space-6 $space-6 $space-12 !important;
+  min-height: calc(100vh - 64px);
+
+  @include mobile {
+    padding: $space-4 $space-3 $space-12 !important;
+  }
+}
+
+.closeBtn {
+  display: none;
+  position: absolute;
+  top: $space-3;
+  right: $space-3;
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+  background: $color-surface;
+  place-items: center;
+  cursor: pointer;
+
+  @include sm-down { display: grid; }
+}

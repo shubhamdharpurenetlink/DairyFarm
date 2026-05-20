@@ -1,0 +1,13 @@
+@use "@/styles/variables" as *;
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #f5b400;
+  font-weight: $fw-semibold;
+  font-size: 0.85rem;
+}
+
+.value { color: $color-text-primary; }
+.count { color: $color-text-tertiary; font-weight: $fw-regular; }

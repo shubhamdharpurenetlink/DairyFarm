@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import AboutHero from "@/components/about/AboutHero";
-import FounderMessage from "@/components/about/FounderMessage";
-import Timeline from "@/components/about/Timeline";
-import FacilitiesGrid from "@/components/about/FacilitiesGrid";
-import TeamGrid from "@/components/about/TeamGrid";
-import Awards from "@/components/about/Awards";
+import AboutHero from "@/features/about/components/AboutHero";
+import FounderMessage from "@/features/about/components/FounderMessage";
+import Timeline from "@/features/about/components/Timeline";
+import FacilitiesGrid from "@/features/about/components/FacilitiesGrid";
+import TeamGrid from "@/features/about/components/TeamGrid";
+import Awards from "@/features/about/components/Awards";
 
 export async function generateMetadata({
   params,
