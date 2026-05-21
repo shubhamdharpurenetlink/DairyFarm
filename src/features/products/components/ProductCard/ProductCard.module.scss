@@ -7,6 +7,8 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
+  width: 100%;
+  min-width: 0;
 }
 
 .imgLink {
@@ -59,15 +61,32 @@
   flex-direction: column;
   gap: $space-2;
   flex: 1;
+  min-width: 0;
+
+  @include mobile {
+    padding: $space-3 $space-3 $space-4;
+    gap: $space-2;
+  }
 }
 
-.titleLink { text-decoration: none; color: inherit; }
+.titleLink {
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+}
 
 .title {
   @include h4;
   margin: 0;
   color: $color-text-primary;
   @include text-clamp(1);
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+
+  @include mobile {
+    font-size: 1rem;
+  }
 }
 
 .desc {
@@ -75,6 +94,13 @@
   color: $color-text-secondary;
   margin: 0;
   @include text-clamp(2);
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+
+  @include mobile {
+    font-size: 0.8125rem;
+  }
 }
 
 .meta {
@@ -83,12 +109,18 @@
   justify-content: space-between;
   gap: $space-2;
   margin-top: $space-1;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .variantTag {
   margin: 0 !important;
   background: transparent !important;
   border-color: $color-border !important;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .footer {
@@ -99,6 +131,8 @@
   margin-top: auto;
   padding-top: $space-3;
   border-top: 1px solid $color-border;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .cta {

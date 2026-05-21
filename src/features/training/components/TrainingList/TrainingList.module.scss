@@ -47,7 +47,20 @@
 .filterRow {
   margin-bottom: $space-6;
   overflow-x: auto;
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
   @include scrollbar-hide;
+
+  > * {
+    max-width: 100%;
+  }
+
+  :global(.ant-segmented) {
+    overflow-x: auto;
+    max-width: 100%;
+    @include scrollbar-hide;
+  }
 }
 
 .grid {

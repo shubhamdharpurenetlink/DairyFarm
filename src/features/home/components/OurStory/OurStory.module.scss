@@ -3,6 +3,7 @@
 
 .section {
   background: linear-gradient(180deg, $color-bg 0%, $color-surface 100%);
+  overflow: hidden;
 }
 
 .grid {
