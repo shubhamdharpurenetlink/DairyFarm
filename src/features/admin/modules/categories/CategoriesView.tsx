@@ -4,7 +4,7 @@ import { Avatar, Tag, Button, Space, Tooltip } from "antd";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { categoryRepo } from "@/services/repos";
 import { routes } from "@/lib/routes";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -16,6 +16,7 @@ import type { ProductCategoryDef } from "@/types";
 export default function CategoriesView() {
   const t = useTranslations("admin.categories");
   const data = useHydratedRepo(categoryRepo);
+  const ready = useRepoReady(categoryRepo);
   const { pick } = useBilingual();
   const router = useRouter();
   return (
@@ -34,6 +35,7 @@ export default function CategoriesView() {
       <DataTable<ProductCategoryDef>
         data={data}
         rowKey="slug"
+        loading={!ready}
         searchableFields={["slug"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

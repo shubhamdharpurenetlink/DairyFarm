@@ -4,7 +4,7 @@ import { Avatar, Tag, Button, Tooltip, Space } from "antd";
 import { Trash2, Plus, Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { galleryRepo } from "@/services/repos";
 import { routes } from "@/lib/routes";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -16,6 +16,7 @@ import type { GalleryItem } from "@/types";
 export default function GalleryAdminView() {
   const t = useTranslations("admin.gallery");
   const data = useHydratedRepo(galleryRepo);
+  const ready = useRepoReady(galleryRepo);
   const { pick } = useBilingual();
   const router = useRouter();
   return (
@@ -34,6 +35,7 @@ export default function GalleryAdminView() {
       <DataTable<GalleryItem>
         data={data}
         rowKey="id"
+        loading={!ready}
         searchableFields={["id"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

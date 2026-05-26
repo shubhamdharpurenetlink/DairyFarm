@@ -3,7 +3,7 @@
 import { Avatar, Tag, Select, Button, Tooltip, Space } from "antd";
 import { Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { enquiryRepo } from "@/services/repos";
 import { formatRelativeTime } from "@/lib/formatters";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -18,6 +18,7 @@ const STATUSES: EnquiryStatus[] = ["new", "open", "resolved", "spam"];
 export default function EnquiriesView() {
   const t = useTranslations("admin.enquiries");
   const data = useHydratedRepo(enquiryRepo);
+  const ready = useRepoReady(enquiryRepo);
   const { locale } = useBilingual();
 
   return (
@@ -26,6 +27,7 @@ export default function EnquiriesView() {
       <DataTable<Enquiry>
         data={data}
         rowKey="id"
+        loading={!ready}
         searchableFields={["name", "email", "message"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

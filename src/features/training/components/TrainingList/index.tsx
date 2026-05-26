@@ -10,8 +10,9 @@ import { Calendar, Users, ArrowRight } from "lucide-react";
 import SectionHeader from "@/ui/SectionHeader";
 import StatCounter from "@/ui/StatCounter";
 import { staggerContainer, fadeUp, viewport } from "@/lib/animations";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { trainingRepo } from "@/services/repos";
+import { ListSkeleton, TrainingCardSkeleton } from "@/ui/Skeleton";
 import type { Level } from "@/types";
 import styles from "./TrainingList.module.scss";
 
@@ -24,6 +25,7 @@ export default function TrainingList() {
   const isHi = locale === "hi";
   const [level, setLevel] = useState<LevelFilter>("all");
   const trainings = useHydratedRepo(trainingRepo);
+  const ready = useRepoReady(trainingRepo);
 
   const items = useMemo(
     () =>
@@ -61,6 +63,9 @@ export default function TrainingList() {
           />
         </div>
 
+        {!ready && trainings.length === 0 ? (
+          <ListSkeleton count={6} variant="default" card={TrainingCardSkeleton} />
+        ) : (
         <motion.div
           className={styles.grid}
           variants={staggerContainer}
@@ -117,6 +122,7 @@ export default function TrainingList() {
             </motion.div>
           ))}
         </motion.div>
+        )}
       </div>
     </section>
   );

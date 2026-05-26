@@ -9,8 +9,9 @@ import { Play } from "lucide-react";
 import SectionHeader from "@/ui/SectionHeader";
 import Lightbox from "../Lightbox";
 import { staggerContainer, fadeUp, viewport } from "@/lib/animations";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { galleryRepo } from "@/services/repos";
+import { ListSkeleton, GalleryItemSkeleton } from "@/ui/Skeleton";
 import type { GalleryItem } from "@/types";
 import styles from "./GalleryView.module.scss";
 
@@ -20,9 +21,21 @@ export default function GalleryView() {
   const isHi = locale === "hi";
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const gallery = useHydratedRepo(galleryRepo);
+  const ready = useRepoReady(galleryRepo);
 
   const photos = gallery.filter((g) => g.type === "photo");
   const videos = gallery.filter((g) => g.type === "video");
+
+  if (!ready && gallery.length === 0) {
+    return (
+      <section className={`section ${styles.section}`}>
+        <div className="container">
+          <SectionHeader title={t("title")} subtitle={t("subtitle")} />
+          <ListSkeleton count={9} variant="gallery" card={GalleryItemSkeleton} />
+        </div>
+      </section>
+    );
+  }
 
   const handleOpen = (item: GalleryItem) => {
     const idx = photos.findIndex((p) => p.id === item.id);

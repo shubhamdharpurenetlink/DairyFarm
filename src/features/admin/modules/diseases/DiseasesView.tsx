@@ -5,7 +5,7 @@ import { Trash2, ExternalLink, Plus, Pencil } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { diseaseRepo } from "@/services/repos";
 import { routes } from "@/lib/routes";
 import { formatDate } from "@/lib/formatters";
@@ -18,6 +18,7 @@ import type { Disease } from "@/types";
 export default function DiseasesView() {
   const t = useTranslations("admin.diseases");
   const data = useHydratedRepo(diseaseRepo);
+  const ready = useRepoReady(diseaseRepo);
   const { pick, locale } = useBilingual();
   const router = useRouter();
   return (
@@ -36,6 +37,7 @@ export default function DiseasesView() {
       <DataTable<Disease>
         data={data}
         rowKey="slug"
+        loading={!ready}
         searchableFields={["slug"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

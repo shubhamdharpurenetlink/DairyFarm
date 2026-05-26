@@ -1,0 +1,409 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+%shimmer-bg {
+  background: linear-gradient(
+    90deg,
+    $color-surface-alt 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    $color-surface-alt 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s linear infinite;
+
+  @include respect-motion {
+    animation: none;
+    background: $color-surface-alt;
+  }
+}
+
+.block {
+  @extend %shimmer-bg;
+  display: block;
+  border-radius: $radius-md;
+  width: 100%;
+  height: 1em;
+}
+
+.circle {
+  @extend %shimmer-bg;
+  border-radius: $radius-full;
+}
+
+.image {
+  @extend %shimmer-bg;
+  width: 100%;
+  border-radius: $radius-lg;
+  aspect-ratio: 4 / 3;
+}
+
+.card {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.cardImg {
+  @extend %shimmer-bg;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 0;
+}
+
+.cardBody {
+  padding: $space-4 $space-5 $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  @include mobile {
+    padding: $space-3 $space-3 $space-4;
+  }
+}
+
+.lineFull {
+  height: 14px;
+  width: 100%;
+}
+
+.line80 {
+  height: 12px;
+  width: 80%;
+}
+
+.line60 {
+  height: 12px;
+  width: 60%;
+}
+
+.line50 {
+  height: 12px;
+  width: 50%;
+}
+
+.line40 {
+  height: 12px;
+  width: 40%;
+}
+
+.line30 {
+  height: 12px;
+  width: 30%;
+}
+
+.title {
+  height: 22px;
+  width: 70%;
+  margin-top: $space-1;
+}
+
+.subtitle {
+  height: 14px;
+  width: 45%;
+}
+
+.cardFooter {
+  margin-top: auto;
+  padding-top: $space-3;
+  border-top: 1px solid $color-border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+}
+
+.priceBlock {
+  height: 22px;
+  width: 30%;
+  min-width: 80px;
+}
+
+.btnBlock {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.grid {
+  display: grid;
+  gap: $space-6;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+  @include mobile {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $space-3;
+  }
+}
+
+.gridWide {
+  display: grid;
+  gap: $space-6;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $space-4;
+  }
+}
+
+.gridSmall {
+  display: grid;
+  gap: $space-4;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+
+  @include mobile {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $space-3;
+  }
+}
+
+// ---- Hero ----
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+  padding: $space-16 0;
+
+  @include md-up {
+    flex-direction: row;
+    align-items: center;
+    padding: $space-24 0;
+  }
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  flex: 1;
+}
+
+.heroMedia {
+  flex: 1;
+  aspect-ratio: 4 / 3;
+}
+
+.heroTitle {
+  height: 48px;
+  width: 80%;
+
+  @include mobile {
+    height: 32px;
+  }
+}
+
+.heroSubtitle {
+  height: 18px;
+  width: 65%;
+}
+
+.heroCta {
+  display: flex;
+  gap: $space-3;
+  margin-top: $space-3;
+}
+
+.heroBtn {
+  height: 44px;
+  width: 140px;
+  border-radius: $radius-full;
+}
+
+// ---- Stats row ----
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: $space-4;
+  padding: $space-6 0;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  align-items: center;
+  padding: $space-4;
+}
+
+.statValue {
+  height: 32px;
+  width: 70%;
+}
+
+.statLabel {
+  height: 12px;
+  width: 50%;
+}
+
+// ---- Section header ----
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+  padding-bottom: $space-8;
+}
+
+.sectionHeaderTitle {
+  height: 36px;
+  width: clamp(160px, 50%, 420px);
+}
+
+.sectionHeaderSubtitle {
+  height: 14px;
+  width: clamp(220px, 60%, 560px);
+}
+
+// ---- Detail page ----
+.detail {
+  display: grid;
+  gap: $space-8;
+  padding: $space-8 0;
+  grid-template-columns: 1fr;
+
+  @include md-up {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: $space-12;
+  }
+}
+
+.detailMedia {
+  aspect-ratio: 4 / 3;
+}
+
+.detailInfo {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.tagsRow {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.tagBlock {
+  height: 22px;
+  width: 64px;
+  border-radius: $radius-full;
+}
+
+.paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+// ---- Table ----
+.table {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+.tableHeader,
+.tableRow {
+  display: grid;
+  gap: $space-3;
+  align-items: center;
+  padding: $space-3 $space-4;
+}
+
+.tableHeader {
+  border-bottom: 1px solid $color-border;
+  background: $color-surface-alt;
+}
+
+.tableRow + .tableRow {
+  border-top: 1px solid $color-border;
+}
+
+.tableCell {
+  height: 14px;
+  width: 100%;
+}
+
+// ---- Gallery ----
+.galleryGrid {
+  display: grid;
+  gap: $space-3;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+  @include mobile {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.galleryTile {
+  aspect-ratio: 1;
+  border-radius: $radius-lg;
+}
+
+// ---- Team / testimonial ----
+.teamCard {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+}
+
+.teamAvatar {
+  width: 96px;
+  height: 96px;
+  border-radius: $radius-full;
+}
+
+.testimonialCard {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.testimonialLines {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.testimonialFooter {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-top: $space-3;
+}
+
+// ---- Filter bar ----
+.filterBar {
+  display: flex;
+  gap: $space-3;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: $space-4 0;
+}
+
+.chip {
+  height: 36px;
+  width: 96px;
+  border-radius: $radius-full;
+}

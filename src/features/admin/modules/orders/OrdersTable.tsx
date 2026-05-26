@@ -5,7 +5,7 @@ import { Button, Space, Tooltip, Select } from "antd";
 import { Eye, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter, Link } from "@/i18n/routing";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { orderRepo } from "@/services/repos";
 import { orderService } from "@/services/orderService";
 import { formatInr, formatRelativeTime } from "@/lib/formatters";
@@ -30,6 +30,7 @@ export default function OrdersTable() {
   const t = useTranslations("admin.orders");
   const router = useRouter();
   const orders = useHydratedRepo(orderRepo);
+  const ready = useRepoReady(orderRepo);
   const { locale } = useBilingual();
   const [statusFilter, setStatusFilter] = useState<OrderStatus | "all">("all");
 
@@ -51,6 +52,7 @@ export default function OrdersTable() {
       <DataTable<Order>
         data={filtered}
         rowKey="id"
+        loading={!ready}
         searchableFields={["orderNumber"]}
         searchPlaceholder={t("searchPlaceholder")}
         toolbar={

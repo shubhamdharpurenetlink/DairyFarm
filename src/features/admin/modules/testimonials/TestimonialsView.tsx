@@ -4,7 +4,7 @@ import { Avatar, Rate, Button, Tooltip, Space } from "antd";
 import { Trash2, Plus, Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { testimonialRepo } from "@/services/repos";
 import { routes } from "@/lib/routes";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -16,6 +16,7 @@ import type { Testimonial } from "@/types";
 export default function TestimonialsView() {
   const t = useTranslations("admin.testimonials");
   const data = useHydratedRepo(testimonialRepo);
+  const ready = useRepoReady(testimonialRepo);
   const { pick } = useBilingual();
   const router = useRouter();
   return (
@@ -34,6 +35,7 @@ export default function TestimonialsView() {
       <DataTable<Testimonial>
         data={data}
         rowKey="id"
+        loading={!ready}
         searchableFields={["name", "city"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

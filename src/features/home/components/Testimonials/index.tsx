@@ -5,8 +5,9 @@ import { useLocale, useTranslations } from "next-intl";
 import { Carousel, Rate } from "antd";
 import { Quote } from "lucide-react";
 import SectionHeader from "@/ui/SectionHeader";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { testimonialRepo } from "@/services/repos";
+import { ListSkeleton, TestimonialSkeleton } from "@/ui/Skeleton";
 import styles from "./Testimonials.module.scss";
 
 export default function Testimonials() {
@@ -14,6 +15,18 @@ export default function Testimonials() {
   const locale = useLocale();
   const isHi = locale === "hi";
   const testimonials = useHydratedRepo(testimonialRepo);
+  const ready = useRepoReady(testimonialRepo);
+
+  if (!ready && testimonials.length === 0) {
+    return (
+      <section className={`section ${styles.section}`}>
+        <div className="container">
+          <SectionHeader title={t("testimonialsTitle")} />
+          <ListSkeleton count={3} variant="wide" card={TestimonialSkeleton} />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className={`section ${styles.section}`}>

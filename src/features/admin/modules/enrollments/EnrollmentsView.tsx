@@ -3,7 +3,7 @@
 import { Select, Button, Tooltip, Space, Tag } from "antd";
 import { Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { enrollmentRepo } from "@/services/repos";
 import { formatDate } from "@/lib/formatters";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -19,12 +19,14 @@ export default function EnrollmentsView() {
   const t = useTranslations("admin.enrollments");
   const { locale } = useBilingual();
   const data = useHydratedRepo(enrollmentRepo);
+  const ready = useRepoReady(enrollmentRepo);
   return (
     <>
       <PageHeader title={t("title")} subtitle={t("subtitle")} />
       <DataTable<Enrollment>
         data={data}
         rowKey="id"
+        loading={!ready}
         searchableFields={["fullName", "email", "trainingTitleEn", "state"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

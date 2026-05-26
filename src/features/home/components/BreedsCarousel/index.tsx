@@ -8,8 +8,9 @@ import { Button, Tag } from "antd";
 import { ArrowRight } from "lucide-react";
 import SectionHeader from "@/ui/SectionHeader";
 import { staggerContainer, fadeUp, viewport } from "@/lib/animations";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { cowRepo } from "@/services/repos";
+import { ListSkeleton, CowCardSkeleton } from "@/ui/Skeleton";
 import styles from "./BreedsCarousel.module.scss";
 
 export default function BreedsCarousel() {
@@ -19,6 +20,7 @@ export default function BreedsCarousel() {
   const locale = useLocale();
   const isHi = locale === "hi";
   const cows = useHydratedRepo(cowRepo);
+  const ready = useRepoReady(cowRepo);
 
   return (
     <section className={`section ${styles.section}`}>
@@ -28,6 +30,9 @@ export default function BreedsCarousel() {
           title={t("breedsTitle")}
         />
 
+        {!ready && cows.length === 0 ? (
+          <ListSkeleton count={4} variant="default" card={CowCardSkeleton} />
+        ) : (
         <motion.div
           className={styles.scroller}
           variants={staggerContainer}
@@ -85,6 +90,7 @@ export default function BreedsCarousel() {
             </motion.div>
           ))}
         </motion.div>
+        )}
 
         <div className={styles.viewAll}>
           <Link href="/cows">

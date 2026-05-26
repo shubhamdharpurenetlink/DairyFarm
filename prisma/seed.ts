@@ -449,9 +449,8 @@ async function seedEnquiries() {
 }
 
 async function seedEnrollments() {
-  const trainingSlugs = new Set(
-    (await prisma.training.findMany({ select: { slug: true } })).map((t) => t.slug),
-  );
+  const existing = await prisma.training.findMany({ select: { slug: true } });
+  const trainingSlugs = new Set(existing.map((t: { slug: string }) => t.slug));
   for (const en of enrollments) {
     if (!trainingSlugs.has(en.trainingId)) {
       console.log(`  skip enrollment ${en.id}: no training ${en.trainingId}`);
@@ -537,9 +536,45 @@ async function seedOrders() {
   console.log(`✓ ${orders.length} sample orders upserted`);
 }
 
+/**
+ * Removes records that were inserted by previous demo seeds so the admin
+ * dashboard starts clean. Only deletes by known demo IDs / orderNumbers to
+ * avoid wiping real customer data accidentally.
+ */
+async function cleanDemoRecords() {
+  const demoEnquiryIds = ["e1", "e2", "e3", "e4"];
+  const demoEnrollmentIds = ["en1", "en2", "en3"];
+  const demoSubscriberIds = ["s1", "s2", "s3", "s4"];
+  const demoOrderIds = ["o1", "o2", "o3", "o4"];
+  const demoOrderNumbers = [
+    "LD-2026-0008",
+    "LD-2026-0009",
+    "LD-2026-0010",
+    "LD-2026-0011",
+  ];
+
+  const [eq, en, su, oId, oNum] = await Promise.all([
+    prisma.enquiry.deleteMany({ where: { id: { in: demoEnquiryIds } } }),
+    prisma.enrollment.deleteMany({ where: { id: { in: demoEnrollmentIds } } }),
+    prisma.subscriber.deleteMany({ where: { id: { in: demoSubscriberIds } } }),
+    prisma.order.deleteMany({ where: { id: { in: demoOrderIds } } }),
+    prisma.order.deleteMany({ where: { orderNumber: { in: demoOrderNumbers } } }),
+  ]);
+
+  const total = eq.count + en.count + su.count + oId.count + oNum.count;
+  if (total > 0) {
+    console.log(
+      `✓ cleaned ${total} demo records (${eq.count} enquiries, ${en.count} enrollments, ${su.count} subscribers, ${oId.count + oNum.count} orders)`,
+    );
+  } else {
+    console.log("✓ no demo records found to clean");
+  }
+}
+
 async function main() {
   console.log("Seeding Laxmi Dairy Farm database…");
   await seedAdmin();
+  await cleanDemoRecords();
   await seedSettings();
   await seedCategories();
   await seedProducts();

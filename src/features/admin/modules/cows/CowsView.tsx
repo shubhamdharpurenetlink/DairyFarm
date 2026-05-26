@@ -5,7 +5,7 @@ import { Trash2, ExternalLink, Plus, Pencil } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { cowRepo } from "@/services/repos";
 import { routes } from "@/lib/routes";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -17,6 +17,7 @@ import type { CowBreed } from "@/types";
 export default function CowsView() {
   const t = useTranslations("admin.cows");
   const data = useHydratedRepo(cowRepo);
+  const ready = useRepoReady(cowRepo);
   const { pick } = useBilingual();
   const router = useRouter();
   return (
@@ -35,6 +36,7 @@ export default function CowsView() {
       <DataTable<CowBreed>
         data={data}
         rowKey="slug"
+        loading={!ready}
         searchableFields={["slug", "nameEn", "origin"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

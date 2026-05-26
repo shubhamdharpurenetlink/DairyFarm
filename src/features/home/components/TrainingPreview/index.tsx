@@ -8,8 +8,9 @@ import { Button, Tag } from "antd";
 import { ArrowRight, Calendar, Users } from "lucide-react";
 import SectionHeader from "@/ui/SectionHeader";
 import { staggerContainer, fadeUp, viewport } from "@/lib/animations";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { trainingRepo } from "@/services/repos";
+import { ListSkeleton, TrainingCardSkeleton } from "@/ui/Skeleton";
 import styles from "./TrainingPreview.module.scss";
 
 export default function TrainingPreview() {
@@ -19,6 +20,7 @@ export default function TrainingPreview() {
   const locale = useLocale();
   const isHi = locale === "hi";
   const trainings = useHydratedRepo(trainingRepo);
+  const ready = useRepoReady(trainingRepo);
 
   const items = trainings.slice(0, 2);
 
@@ -30,6 +32,9 @@ export default function TrainingPreview() {
           title={t("trainingTitle")}
         />
 
+        {!ready && trainings.length === 0 ? (
+          <ListSkeleton count={2} variant="wide" card={TrainingCardSkeleton} />
+        ) : (
         <motion.div
           className={styles.grid}
           variants={staggerContainer}
@@ -86,6 +91,7 @@ export default function TrainingPreview() {
             </motion.div>
           ))}
         </motion.div>
+        )}
 
         <div className={styles.viewAll}>
           <Link href="/training">

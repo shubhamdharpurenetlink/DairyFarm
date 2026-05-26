@@ -8,9 +8,10 @@ import { Link } from "@/i18n/routing";
 import { Input, Segmented, Tag, Alert } from "antd";
 import { Search, Clock, ArrowRight } from "lucide-react";
 import SectionHeader from "@/ui/SectionHeader";
-import { staggerContainer, fadeUp, viewport } from "@/lib/animations";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { staggerContainer, fadeUp } from "@/lib/animations";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { diseaseRepo } from "@/services/repos";
+import { ListSkeleton, DiseaseCardSkeleton } from "@/ui/Skeleton";
 import type { DiseaseCategory } from "@/types";
 import styles from "./CareListing.module.scss";
 
@@ -23,6 +24,7 @@ export default function CareListing() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<CatFilter>("all");
   const diseases = useHydratedRepo(diseaseRepo);
+  const ready = useRepoReady(diseaseRepo);
 
   const items = useMemo(() => {
     return diseases.filter((d) => {
@@ -79,6 +81,9 @@ export default function CareListing() {
           />
         </div>
 
+        {!ready && diseases.length === 0 ? (
+          <ListSkeleton count={6} variant="wide" card={DiseaseCardSkeleton} />
+        ) : (
         <AnimatePresence mode="wait">
           <motion.div
             key={`${cat}-${q}`}
@@ -128,6 +133,7 @@ export default function CareListing() {
             ))}
           </motion.div>
         </AnimatePresence>
+        )}
       </div>
     </section>
   );

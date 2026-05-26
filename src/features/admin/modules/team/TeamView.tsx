@@ -4,7 +4,7 @@ import { Avatar, Button, Tooltip, Space } from "antd";
 import { Trash2, Plus, Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { teamRepo } from "@/services/repos";
 import { routes } from "@/lib/routes";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -16,6 +16,7 @@ import type { TeamMember } from "@/types";
 export default function TeamView() {
   const t = useTranslations("admin.team");
   const data = useHydratedRepo(teamRepo);
+  const ready = useRepoReady(teamRepo);
   const { pick } = useBilingual();
   const router = useRouter();
   return (
@@ -34,6 +35,7 @@ export default function TeamView() {
       <DataTable<TeamMember>
         data={data}
         rowKey="id"
+        loading={!ready}
         searchableFields={["name"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

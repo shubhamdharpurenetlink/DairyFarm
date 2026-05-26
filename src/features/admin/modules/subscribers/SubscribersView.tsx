@@ -3,7 +3,7 @@
 import { Button, Tooltip, Space } from "antd";
 import { Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { subscriberRepo } from "@/services/repos";
 import { formatDate } from "@/lib/formatters";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -16,12 +16,14 @@ export default function SubscribersView() {
   const t = useTranslations("admin.subscribers");
   const { locale } = useBilingual();
   const data = useHydratedRepo(subscriberRepo);
+  const ready = useRepoReady(subscriberRepo);
   return (
     <>
       <PageHeader title={t("title")} subtitle={t("subtitle")} />
       <DataTable<Subscriber>
         data={data}
         rowKey="id"
+        loading={!ready}
         searchableFields={["email"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

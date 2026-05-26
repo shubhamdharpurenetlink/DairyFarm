@@ -11,11 +11,12 @@ import EmptyState from "@/ui/EmptyState";
 import { staggerContainer, fadeUp, viewport } from "@/lib/animations";
 import { useDebouncedValue } from "@/hooks/useDebouncedValue";
 import { useBilingual } from "@/hooks/useBilingual";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { productRepo } from "@/services/repos";
 import type { Product, ProductCategory } from "@/types";
 import ProductCard from "../ProductCard";
 import CategoryChips from "../CategoryChips";
+import { ListSkeleton, ProductCardSkeleton } from "@/ui/Skeleton";
 import styles from "./ProductsListing.module.scss";
 
 type SortKey = "featured" | "priceAsc" | "priceDesc" | "newest";
@@ -26,6 +27,7 @@ export default function ProductsListing() {
   const { pick } = useBilingual();
 
   const allProducts = useHydratedRepo(productRepo);
+  const ready = useRepoReady(productRepo);
   const [category, setCategory] = useState<ProductCategory | "all">("all");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortKey>("featured");
@@ -101,7 +103,9 @@ export default function ProductsListing() {
             </div>
           </div>
 
-          {filtered.length === 0 ? (
+          {!ready && allProducts.length === 0 ? (
+            <ListSkeleton count={9} variant="default" card={ProductCardSkeleton} />
+          ) : filtered.length === 0 ? (
             <EmptyState title={t("emptyTitle")} description={t("emptyDesc")} />
           ) : (
             <motion.div

@@ -5,7 +5,7 @@ import { Trash2, ExternalLink, Plus, Pencil } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { trainingRepo } from "@/services/repos";
 import { routes } from "@/lib/routes";
 import { formatInr } from "@/lib/formatters";
@@ -18,6 +18,7 @@ import type { TrainingProgram } from "@/types";
 export default function TrainingsView() {
   const t = useTranslations("admin.trainings");
   const data = useHydratedRepo(trainingRepo);
+  const ready = useRepoReady(trainingRepo);
   const { pick } = useBilingual();
   const router = useRouter();
   return (
@@ -36,6 +37,7 @@ export default function TrainingsView() {
       <DataTable<TrainingProgram>
         data={data}
         rowKey="slug"
+        loading={!ready}
         searchableFields={["slug"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

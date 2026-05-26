@@ -5,8 +5,9 @@ import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import SectionHeader from "@/ui/SectionHeader";
 import { fadeUp, staggerContainer, viewport } from "@/lib/animations";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { teamRepo } from "@/services/repos";
+import { ListSkeleton, TeamCardSkeleton } from "@/ui/Skeleton";
 import styles from "./TeamGrid.module.scss";
 
 export default function TeamGrid() {
@@ -14,11 +15,15 @@ export default function TeamGrid() {
   const locale = useLocale();
   const isHi = locale === "hi";
   const team = useHydratedRepo(teamRepo);
+  const ready = useRepoReady(teamRepo);
 
   return (
     <section className={`section ${styles.section}`}>
       <div className="container">
         <SectionHeader eyebrow={t("teamSub")} title={t("teamTitle")} />
+        {!ready && team.length === 0 ? (
+          <ListSkeleton count={6} variant="small" card={TeamCardSkeleton} />
+        ) : (
         <motion.div
           className={styles.grid}
           variants={staggerContainer}
@@ -48,6 +53,7 @@ export default function TeamGrid() {
             </motion.div>
           ))}
         </motion.div>
+        )}
       </div>
     </section>
   );

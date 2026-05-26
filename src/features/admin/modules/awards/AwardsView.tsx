@@ -4,7 +4,7 @@ import { Tag, Button, Tooltip, Space } from "antd";
 import { Trash2, Plus, Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { awardRepo } from "@/services/repos";
 import { routes } from "@/lib/routes";
 import { useBilingual } from "@/hooks/useBilingual";
@@ -16,6 +16,7 @@ import type { Award } from "@/types";
 export default function AwardsView() {
   const t = useTranslations("admin.awards");
   const data = useHydratedRepo(awardRepo);
+  const ready = useRepoReady(awardRepo);
   const { pick } = useBilingual();
   const router = useRouter();
   return (
@@ -34,6 +35,7 @@ export default function AwardsView() {
       <DataTable<Award>
         data={data}
         rowKey="id"
+        loading={!ready}
         searchableFields={["issuer"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

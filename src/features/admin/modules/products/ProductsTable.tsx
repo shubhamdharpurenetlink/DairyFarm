@@ -4,7 +4,7 @@ import { Button, Space, Tag, Tooltip, Avatar } from "antd";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/routing";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { productRepo } from "@/services/repos";
 import { formatInr } from "@/lib/formatters";
 import { routes } from "@/lib/routes";
@@ -18,6 +18,7 @@ export default function ProductsTable() {
   const t = useTranslations("admin.products");
   const router = useRouter();
   const products = useHydratedRepo(productRepo);
+  const ready = useRepoReady(productRepo);
   const { pick } = useBilingual();
 
   const handleDelete = (p: Product) =>
@@ -46,6 +47,7 @@ export default function ProductsTable() {
       <DataTable<Product>
         data={products}
         rowKey="slug"
+        loading={!ready}
         searchableFields={["slug", "name", "category"]}
         searchPlaceholder={t("searchPlaceholder")}
         columns={[

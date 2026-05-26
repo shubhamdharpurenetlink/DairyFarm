@@ -49,7 +49,9 @@ function emitError(detail: RepoErrorDetail) {
 export class Repository<T> {
   private cache: T[];
   private listeners = new Set<(items: T[]) => void>();
+  private readyListeners = new Set<(ready: boolean) => void>();
   private hasRefreshed = false;
+  private ready = false;
   private refreshPromise: Promise<T[]> | null = null;
 
   constructor(
@@ -63,6 +65,17 @@ export class Repository<T> {
   private setCache(next: T[]) {
     this.cache = next;
     for (const fn of this.listeners) fn([...this.cache]);
+  }
+
+  private setReady(value: boolean) {
+    if (this.ready === value) return;
+    this.ready = value;
+    for (const fn of this.readyListeners) fn(value);
+  }
+
+  /** Has the repo been hydrated from the server (RSC handoff or API refresh)? */
+  isReady(): boolean {
+    return this.ready;
   }
 
   private getId(item: T): string {
@@ -101,12 +114,17 @@ export class Repository<T> {
     this.refreshPromise = apiFetch<T[]>({ path: `/${this.resource}`, cache: "no-store" })
       .then((items) => {
         this.setCache(items);
+        this.setReady(true);
         return items;
       })
       .catch((e: unknown) => {
         const code = e instanceof ApiError ? e.code : "NETWORK_ERROR";
         const message = e instanceof Error ? e.message : "Failed to refresh";
         emitError({ resource: this.resource, op: "refresh", code, message });
+        // Even on failure, mark ready so the UI escapes the skeleton state and
+        // shows whatever seed snapshot we have. RepoErrorToaster surfaces the
+        // problem to admins separately.
+        this.setReady(true);
         return this.cache;
       })
       .finally(() => {
@@ -239,12 +257,21 @@ export class Repository<T> {
   hydrate(items: T[]): void {
     this.cache = [...items];
     this.hasRefreshed = true;
+    this.setReady(true);
   }
 
   subscribe(listener: (items: T[]) => void): () => void {
     this.listeners.add(listener);
     return () => {
       this.listeners.delete(listener);
+    };
+  }
+
+  /** Subscribe to ready-state changes. */
+  subscribeReady(listener: (ready: boolean) => void): () => void {
+    this.readyListeners.add(listener);
+    return () => {
+      this.readyListeners.delete(listener);
     };
   }
 }

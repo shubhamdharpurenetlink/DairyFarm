@@ -8,16 +8,18 @@ import { ArrowRight } from "lucide-react";
 import SectionHeader from "@/ui/SectionHeader";
 import Container from "@/ui/Container";
 import { staggerContainer, fadeUp, viewport } from "@/lib/animations";
-import { useHydratedRepo } from "@/hooks/useRepoQuery";
+import { useHydratedRepo, useRepoReady } from "@/hooks/useRepoQuery";
 import { productRepo } from "@/services/repos";
 import { routes } from "@/lib/routes";
 import ProductCard from "../ProductCard";
+import { ListSkeleton, ProductCardSkeleton } from "@/ui/Skeleton";
 import styles from "./ProductsTeaser.module.scss";
 
 export default function ProductsTeaser() {
   const t = useTranslations("home");
   const tCommon = useTranslations("common");
   const all = useHydratedRepo(productRepo);
+  const ready = useRepoReady(productRepo);
   const featured = all
     .filter((p) => p.isAvailable && p.isFeatured)
     .slice(0, 4);
@@ -31,6 +33,9 @@ export default function ProductsTeaser() {
           subtitle={t("productsSub")}
         />
 
+        {!ready && all.length === 0 ? (
+          <ListSkeleton count={4} variant="default" card={ProductCardSkeleton} />
+        ) : (
         <motion.div
           className={styles.grid}
           variants={staggerContainer}
@@ -44,6 +49,7 @@ export default function ProductsTeaser() {
             </motion.div>
           ))}
         </motion.div>
+        )}
 
         <div className={styles.viewAll}>
           <Link href={routes.products}>
