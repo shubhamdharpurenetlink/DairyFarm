@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { bilingualSchema } from "./common";
+import { bilingualSchema, imageUrlSchema } from "./common";
 
 export const productVariantSchema = z.object({
   id: z.string().optional(),
@@ -27,8 +27,8 @@ export const productFormSchema = z.object({
     "sweets",
     "other",
   ]),
-  primaryImage: z.string().url(),
-  images: z.array(z.string().url()).min(1),
+  primaryImage: imageUrlSchema,
+  images: z.array(imageUrlSchema).min(1),
   variants: z.array(productVariantSchema).min(1),
   tags: z.array(z.string()).default([]),
   isFeatured: z.boolean().default(false),

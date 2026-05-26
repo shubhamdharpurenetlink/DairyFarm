@@ -9,6 +9,17 @@ import KnowledgePreview from "@/features/home/components/KnowledgePreview";
 import TrainingPreview from "@/features/home/components/TrainingPreview";
 import Testimonials from "@/features/home/components/Testimonials";
 import Newsletter from "@/features/home/components/Newsletter";
+import RepoHydrator from "@/services/repoHydration";
+import {
+  getProducts,
+  getCows,
+  getDiseases,
+  getTrainings,
+  getTestimonials,
+  getSettings,
+} from "@/server/data";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Laxmi Dairy Farm — Pure A2 Milk Since 1985",
@@ -24,8 +35,20 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
+  const [products, cows, diseases, trainings, testimonials, settings] =
+    await Promise.all([
+      getProducts(),
+      getCows(),
+      getDiseases(),
+      getTrainings(),
+      getTestimonials(),
+      getSettings(),
+    ]);
+
   return (
-    <>
+    <RepoHydrator
+      data={{ products, cows, diseases, trainings, testimonials, settings }}
+    >
       <Hero />
       <Features />
       <OurStory />
@@ -35,6 +58,6 @@ export default async function HomePage({
       <TrainingPreview />
       <Testimonials />
       <Newsletter />
-    </>
+    </RepoHydrator>
   );
 }

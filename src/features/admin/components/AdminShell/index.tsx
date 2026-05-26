@@ -10,6 +10,7 @@ import { routes } from "@/lib/routes";
 import { initials } from "@/lib/formatters";
 import AdminSidebar from "../AdminSidebar";
 import LanguageToggle from "@/layout/LanguageToggle";
+import RepoErrorToaster from "../RepoErrorToaster";
 import styles from "./AdminShell.module.scss";
 
 interface Props {
@@ -32,6 +33,7 @@ export default function AdminShell({ children }: Props) {
 
   return (
     <Layout className={styles.shell}>
+      <RepoErrorToaster />
       <AdminSidebar
         mobileOpen={mobileOpen}
         onClose={() => setMobileOpen(false)}

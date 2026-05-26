@@ -1,9 +1,8 @@
 # Laxmi Dairy Farm — Bilingual PWA + Storefront + Admin CMS
 
-A modern, mobile-first, bilingual (English / Hindi) Progressive Web App for **Laxmi Dairy Farm** — built with Next.js 15, Ant Design v5, SCSS Modules and Framer Motion. The site combines a storytelling public site (about / cows / care / training / gallery / contact), a small e-commerce storefront (milk / ghee / curd / paneer / butter / mawa / sweets) with a demo Cash-on-Delivery checkout, and a full admin CMS to manage every piece of content and engagement on the site.
+A modern, mobile-first, bilingual (English / Hindi) Progressive Web App for **Laxmi Dairy Farm** — built with Next.js 15, Ant Design v5, SCSS Modules and Framer Motion. The site combines a storytelling public site (about / cows / care / training / gallery / contact), a small e-commerce storefront (milk / ghee / curd / paneer / butter / mawa / sweets) with COD + UPI/Card (Razorpay) checkout, and a full admin CMS to manage every piece of content and engagement on the site.
 
-> **Phase 1** (this branch): UI + admin CMS with `localStorage`-backed dummy data. No backend, no real auth, no real payments.
-> **Phase 2** (next): swap the repository layer to Supabase + Razorpay. See [`docs/phase-2-roadmap.md`](./docs/phase-2-roadmap.md).
+**Backend** is wired up: PostgreSQL on Neon, Prisma ORM, Auth.js v5 admin login, Next.js Route Handlers under `/api/v1/*`, and Razorpay Standard Checkout. See [`DEPLOY.md`](./DEPLOY.md) for the free-tier Vercel + Neon deployment guide.
 
 ---
 
@@ -18,9 +17,15 @@ A modern, mobile-first, bilingual (English / Hindi) Progressive Web App for **La
 | i18n | **next-intl** v3 (`en` + `hi` with locale-prefixed routes) |
 | State | **Zustand** (cart, admin session) |
 | Forms | **React Hook Form** + **Zod** validation |
-| Data | Repository pattern → `localStorage` (Phase 1) → Supabase (Phase 2) |
+| Database | **PostgreSQL on Neon** (free tier, never auto-pauses) |
+| ORM | **Prisma 6** with `@prisma/adapter-neon` for serverless |
+| API | **Next.js Route Handlers** under `src/app/api/v1/*` |
+| Auth | **Auth.js v5** (NextAuth) Credentials + JWT cookie |
+| Payments | **Razorpay** Standard Checkout (test mode by default) |
+| Images | URLs only — auto-normalises Google Drive/Photos share links |
 | Icons | **lucide-react** + `@ant-design/icons` |
 | PWA | **@ducanh2912/next-pwa** (manifest, SW, install prompt) |
+| Deploy | **Vercel** Hobby (free) — see [`DEPLOY.md`](./DEPLOY.md) |
 
 ---
 
@@ -28,6 +33,11 @@ A modern, mobile-first, bilingual (English / Hindi) Progressive Web App for **La
 
 ```bash
 npm install
+cp .env.example .env.local
+# fill in DATABASE_URL, AUTH_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD_HASH,
+# RAZORPAY_KEY_ID / SECRET — see DEPLOY.md
+npm run db:deploy    # apply migrations to Neon
+npm run db:seed      # populate content from src/data/seeds/*
 npm run dev          # http://localhost:3000
 npm run build        # production build
 npm run type-check   # TypeScript check
@@ -35,7 +45,7 @@ npm run type-check   # TypeScript check
 
 PWA features are **disabled in dev** and active in production builds.
 
-Admin login (Phase 1, demo): visit `/en/admin/login` and use the demo credentials shown on screen.
+Admin login: visit `/admin/login` and use `ADMIN_EMAIL` + the plain password whose bcrypt hash you put in `ADMIN_PASSWORD_HASH`.
 
 ---
 

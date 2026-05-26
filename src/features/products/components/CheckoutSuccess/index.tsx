@@ -31,7 +31,18 @@ export default function CheckoutSuccess({ orderNumber }: Props) {
   const [order, setOrder] = useState<Order | null | undefined>(undefined);
 
   useEffect(() => {
-    setOrder(orderService.getByNumber(orderNumber) ?? null);
+    let active = true;
+    orderService
+      .getByNumber(orderNumber)
+      .then((o) => {
+        if (active) setOrder(o ?? null);
+      })
+      .catch(() => {
+        if (active) setOrder(null);
+      });
+    return () => {
+      active = false;
+    };
   }, [orderNumber]);
 
   return (

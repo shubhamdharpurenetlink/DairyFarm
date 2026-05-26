@@ -26,6 +26,10 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "i.ytimg.com" },
       { protocol: "https", hostname: "img.youtube.com" },
       { protocol: "https", hostname: "i.pravatar.cc" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "drive.google.com" },
+      { protocol: "https", hostname: "drive.usercontent.google.com" },
+      { protocol: "https", hostname: "photos.fife.usercontent.google.com" },
     ],
   },
   experimental: {

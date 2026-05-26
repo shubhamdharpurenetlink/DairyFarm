@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import CowsListing from "@/features/cows/components/CowsListing";
+import RepoHydrator from "@/services/repoHydration";
+import { getCows } from "@/server/data";
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -19,5 +23,10 @@ export default async function CowsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <CowsListing />;
+  const cows = await getCows();
+  return (
+    <RepoHydrator data={{ cows }}>
+      <CowsListing />
+    </RepoHydrator>
+  );
 }

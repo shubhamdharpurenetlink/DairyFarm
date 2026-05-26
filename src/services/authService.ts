@@ -1,36 +1,25 @@
 "use client";
 
-import { ADMIN_DEMO_EMAIL, ADMIN_DEMO_PASSWORD } from "@/lib/constants";
-import type { AdminSession, AdminUser } from "@/types";
+import { signIn, signOut } from "next-auth/react";
 
 /**
- * Phase-1 demo authentication. Hardcoded credentials, client-side only.
- * Replace with Supabase Auth / NextAuth in Phase 2 by swapping this file.
+ * Thin wrapper around Auth.js so legacy code that imports `authService` keeps
+ * working. New code should call `signIn` / `signOut` from `next-auth/react`
+ * or use `useAdminAuth()` (which is now backed by `useSession`).
  */
 export const authService = {
-  async login(email: string, password: string): Promise<AdminSession> {
-    await sleep(450); // simulated network latency
-    if (
-      email.trim().toLowerCase() !== ADMIN_DEMO_EMAIL ||
-      password !== ADMIN_DEMO_PASSWORD
-    ) {
+  async login(email: string, password: string): Promise<void> {
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    if (!res || res.error) {
       throw new Error("INVALID_CREDENTIALS");
     }
-    const user: AdminUser = {
-      id: "admin-1",
-      name: "Farm Admin",
-      email: ADMIN_DEMO_EMAIL,
-      role: "owner",
-    };
-    return {
-      user,
-      token: `demo.${Date.now()}.${Math.random().toString(36).slice(2)}`,
-      issuedAt: new Date().toISOString(),
-    };
   },
+
   async logout(): Promise<void> {
-    await sleep(120);
+    await signOut({ redirect: false });
   },
 };
-
-const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));

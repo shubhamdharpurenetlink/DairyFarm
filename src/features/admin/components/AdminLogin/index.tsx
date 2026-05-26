@@ -8,7 +8,6 @@ import { Lock, Mail, ShieldCheck, Milk } from "lucide-react";
 import { useRouter } from "@/i18n/routing";
 import { useAdminAuth } from "@/stores/useAdminAuth";
 import { routes } from "@/lib/routes";
-import { ADMIN_DEMO_EMAIL, ADMIN_DEMO_PASSWORD } from "@/lib/constants";
 import styles from "./AdminLogin.module.scss";
 
 export default function AdminLogin() {
@@ -54,14 +53,6 @@ export default function AdminLogin() {
             <p>{t("loginSub")}</p>
           </div>
 
-          <Alert
-            type="info"
-            showIcon
-            message={t("demoCreds")}
-            description={`${ADMIN_DEMO_EMAIL} / ${ADMIN_DEMO_PASSWORD}`}
-            className={styles.alert}
-          />
-
           {error && (
             <Alert
               type="error"
@@ -71,11 +62,7 @@ export default function AdminLogin() {
             />
           )}
 
-          <Form
-            layout="vertical"
-            onFinish={onFinish}
-            initialValues={{ email: ADMIN_DEMO_EMAIL, password: ADMIN_DEMO_PASSWORD }}
-          >
+          <Form layout="vertical" onFinish={onFinish}>
             <Form.Item
               name="email"
               label={t("email")}

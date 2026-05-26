@@ -15,7 +15,7 @@ export const confirmDelete = ({
   okText?: string;
   cancelText?: string;
   onOk: () => void;
-}) => {
+}) => {         
   Modal.confirm({
     title,
     content: description,

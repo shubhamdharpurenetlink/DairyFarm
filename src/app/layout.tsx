@@ -4,6 +4,7 @@ import { Poppins, Inter, Hind } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
 import { antdTheme } from "@/lib/antd-theme";
+import AuthProvider from "./AuthProvider";
 import "@/styles/globals.scss";
 
 const poppins = Poppins({
@@ -74,9 +75,11 @@ export default async function RootLayout({
       className={`${poppins.variable} ${inter.variable} ${hind.variable}`}
     >
       <body>
-        <AntdRegistry>
-          <ConfigProvider theme={antdTheme}>{children}</ConfigProvider>
-        </AntdRegistry>
+        <AuthProvider>
+          <AntdRegistry>
+            <ConfigProvider theme={antdTheme}>{children}</ConfigProvider>
+          </AntdRegistry>
+        </AuthProvider>
       </body>
     </html>
   );

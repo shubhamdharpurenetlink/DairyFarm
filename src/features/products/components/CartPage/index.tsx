@@ -28,6 +28,7 @@ import {
   type ResolvedCartLine,
 } from "@/services/cartService";
 import { orderService, OrderError } from "@/services/orderService";
+import { openRazorpayCheckout } from "@/lib/razorpayClient";
 import { useHydratedSettings } from "@/hooks/useHydratedSettings";
 import { formatInr } from "@/lib/formatters";
 import { routes } from "@/lib/routes";
@@ -79,7 +80,7 @@ export default function CartPage() {
 
     try {
       setSubmitting(true);
-      const order = orderService.placeOrder(
+      const { order, razorpayOrder } = await orderService.placeOrder(
         {
           name: parsed.data.name,
           phone: parsed.data.phone,
@@ -93,12 +94,59 @@ export default function CartPage() {
         parsed.data.paymentMode as PaymentMode,
         resolved,
       );
+
+      if (parsed.data.paymentMode !== "cod" && razorpayOrder) {
+        try {
+          const result = await openRazorpayCheckout({
+            key: razorpayOrder.keyId,
+            amount: razorpayOrder.amount,
+            currency: razorpayOrder.currency,
+            name: "Laxmi Dairy Farm",
+            description: order.orderNumber,
+            order_id: razorpayOrder.id,
+            prefill: {
+              name: parsed.data.name,
+              email: parsed.data.email || undefined,
+              contact: parsed.data.phone,
+            },
+            theme: { color: "#2E7D5B" },
+          });
+          await orderService.verifyRazorpay({
+            orderId: order.id,
+            razorpayOrderId: result.razorpay_order_id,
+            razorpayPaymentId: result.razorpay_payment_id,
+            razorpaySignature: result.razorpay_signature,
+          });
+        } catch (payErr) {
+          if (payErr instanceof Error && payErr.message === "PAYMENT_CANCELLED") {
+            message.warning(t("paymentCancelled"));
+            return;
+          }
+          throw payErr;
+        }
+      }
+
       clear();
       router.push(routes.checkoutSuccess(order.orderNumber));
     } catch (err) {
-      const msg =
-        err instanceof OrderError ? tIssue(err.code) : t("placeOrderFailed");
-      message.error(msg);
+      let msgText: string = t("placeOrderFailed");
+      if (err instanceof OrderError) {
+        const code = err.code;
+        const i18nKeys: Record<string, string> = {
+          STOCK_EXCEEDED: "STOCK_EXCEEDED",
+          PRODUCT_UNAVAILABLE: "PRODUCT_UNAVAILABLE",
+          PINCODE_NOT_SERVICEABLE: "PINCODE_NOT_SERVICEABLE",
+          MIN_ORDER: "MIN_ORDER",
+        };
+        if (i18nKeys[code]) {
+          msgText = tIssue(i18nKeys[code]);
+        } else if (code === "INVALID_SIGNATURE" || code === "PAYMENT_INIT_FAILED") {
+          msgText = t("paymentFailed");
+        } else {
+          msgText = err.message || msgText;
+        }
+      }
+      message.error(msgText);
     } finally {
       setSubmitting(false);
     }

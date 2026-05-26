@@ -262,6 +262,8 @@
     "checkout": "Proceed to Checkout",
     "placeOrder": "Place Order",
     "placeOrderFailed": "Could not place your order. Please try again.",
+    "paymentCancelled": "Payment cancelled. You can retry anytime.",
+    "paymentFailed": "Payment did not complete. Please retry or choose Cash on Delivery.",
     "safeCheckout": "Secure & encrypted checkout. Your data is safe.",
     "minOrderHint": "Minimum order: {amount}",
     "empty": "Your cart is empty",

@@ -14,3 +14,21 @@ export const checkoutSchema = z.object({
 });
 
 export type CheckoutFormValues = z.infer<typeof checkoutSchema>;
+
+export const orderLineSchema = z.object({
+  productSlug: z.string().min(1),
+  variantId: z.string().min(1),
+  qty: z.coerce.number().int().min(1).max(99),
+});
+
+export const placeOrderSchema = checkoutSchema.extend({
+  lines: z.array(orderLineSchema).min(1, "Cart is empty"),
+});
+
+export type PlaceOrderPayload = z.infer<typeof placeOrderSchema>;
+
+export const razorpayVerifySchema = z.object({
+  razorpayOrderId: z.string().min(1),
+  razorpayPaymentId: z.string().min(1),
+  razorpaySignature: z.string().min(1),
+});
