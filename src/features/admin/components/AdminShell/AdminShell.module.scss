@@ -18,14 +18,23 @@
   border-bottom: 1px solid $color-border;
   padding: 0 $space-6 !important;
   height: 64px !important;
-  line-height: 64px !important;
+  line-height: 1.2 !important;
   display: flex;
   align-items: center;
   gap: $space-4;
+  min-width: 0;
 
   @include mobile {
     padding: 0 $space-3 !important;
+    gap: $space-2;
   }
+
+  @include xs-down {
+    padding: 0 $space-2 !important;
+    gap: 6px;
+  }
+
+  > * { min-width: 0; }
 }
 
 .brand {
@@ -34,9 +43,22 @@
   gap: $space-2;
   color: $color-primary;
   font-weight: $fw-bold;
+  min-width: 0;
+  max-width: 40vw;
+  overflow: hidden;
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   @include sm-down {
     display: inline-flex;
+  }
+
+  @include xs-down {
+    span { display: none; }
   }
 }
 
@@ -50,9 +72,15 @@
   cursor: pointer;
   place-items: center;
   color: $color-text-primary;
+  flex-shrink: 0;
 
   @include sm-down {
     display: grid;
+  }
+
+  @include xs-down {
+    width: 36px;
+    height: 36px;
   }
 }
 
@@ -61,6 +89,15 @@
   display: flex;
   align-items: center;
   gap: $space-3;
+  flex-shrink: 0;
+
+  @include mobile {
+    gap: $space-2;
+  }
+
+  @include xs-down {
+    gap: 6px;
+  }
 }
 
 .viewSite {
@@ -76,8 +113,20 @@
   cursor: pointer;
   padding: 4px;
   border-radius: $radius-md;
+  flex-shrink: 0;
 
   &:hover { background: $color-surface-alt; }
+
+  @include sm-down {
+    gap: $space-2;
+
+    :global(.ant-avatar) {
+      width: 32px !important;
+      height: 32px !important;
+      line-height: 32px !important;
+      font-size: 13px !important;
+    }
+  }
 }
 
 .userMeta {

@@ -1,10 +1,21 @@
 @use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
 
 .toggle {
   font-weight: $fw-semibold;
+  flex-shrink: 0;
 
   :global(.ant-segmented-item-selected) {
     background: $color-primary !important;
     color: $color-text-inverse !important;
+  }
+
+  @include sm-down {
+    :global(.ant-segmented-item-label) {
+      padding-inline: 8px !important;
+      min-height: 26px !important;
+      line-height: 26px !important;
+      font-size: 12px !important;
+    }
   }
 }
